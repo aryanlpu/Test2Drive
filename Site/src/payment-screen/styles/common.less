@@ -1,0 +1,44 @@
+
+@import '../../styles/variables/all';
+@import '../../styles/mixins/all';
+
+@profile-pic-spacing: 15px;
+
+.validation-summary {
+    color: @primary-orange;
+}
+
+.ratings {
+    margin-bottom: @dialog-row-spacing;
+
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+
+    label {
+        .font-regular();
+    }
+}
+
+.custom-dialog ::ng-deep .ui-dialog {
+    border: none;
+
+    .ui-dialog-titlebar {
+        padding: 0px;
+        border-radius: 0px;
+
+        h2 {
+            .font-bold();
+            margin-bottom: @dialog-desktop-spacing;
+            color: @dialog-label-color;
+            text-align: center;
+        }
+
+        .x-icon {
+            cursor: pointer;
+            position: absolute;
+            right: .5em;
+            top: .7em;
+        }
+    }
+}

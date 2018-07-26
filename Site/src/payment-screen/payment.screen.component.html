@@ -1,0 +1,54 @@
+<ij-site-subheader></ij-site-subheader>
+<header id="page-header">
+    <div class="jumbo">
+        <h1>{{title | uppercase}}</h1>
+    </div>
+    <nav class="tabs row" style="margin-right:auto;margin-left:auto;">
+        <div class="container">
+        <div class="title col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <span><a [ngClass]="{'text-white': isSiteHeader}" class="menu-item" routerLink="/project/all">Projects</a></span>
+            <div class="actions project-dropdown">
+                <div class="ij-dropdown btn-group ">
+                    <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="../assets/images/blue_drop_down.png" />
+                    </button>
+                    <ul class="pointer dropdown-menu ">
+                        <li *ngFor="let item of model.items">
+                            <a (click)="onHire(item.id,item.isRateAccepted)" *ngIf="item.projectName">"{{item.projectName}}" for {{item.projectType}}</a>
+                        </li>
+                     
+                    </ul>
+                </div>    
+            </div>
+        </div>
+    
+        <div class="col-sm-12  col-md-7  col-lg-7 col-xl-7">
+            <ul>
+                <li>
+                    <a routerLinkActive="active"  *ngIf="!onHireTabEnable()" [routerLink]="['All',{'action':'project'}]"  (click)="setTitle('Welcome to Showbiz')">Hire</a>
+                    <a routerLinkActive="active"  [class.hireActive]="onHireTabEnable()" *ngIf="onHireTabEnable()" [routerLink]="['#']">Hire</a>
+                </li>
+                <li >
+                     <a routerLinkActive="active" *ngIf="onHireTabEnable()"  [class.disabled]="onHireTabEnable()" [routerLink]="onHireTabEnable() ? '#' : 'payment-status'">Payment Status</a> 
+                     <a routerLinkActive="active" *ngIf="!onHireTabEnable()" [routerLink]="['payment-status']"  (click)="setTitle('Payment Status')">Payment Status</a>
+                </li>
+                <li>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+</header>
+<div class="projects-container hirecontainer">
+    <router-outlet></router-outlet>
+</div>
+<ij-hire-policy-dialog></ij-hire-policy-dialog>
+<ij-cancel-policy-dialog></ij-cancel-policy-dialog>
+<ij-report-problem-dialog></ij-report-problem-dialog>
+<ij-deny-request-dialog></ij-deny-request-dialog>
+<ij-send-payment-dialog></ij-send-payment-dialog>
+<ij-late-fee-policy-dialog></ij-late-fee-policy-dialog>
+<ij-mutual-cancellation-dialog></ij-mutual-cancellation-dialog>
+<ij-request-cancellation-dialog></ij-request-cancellation-dialog>
+<ij-site-footer></ij-site-footer>

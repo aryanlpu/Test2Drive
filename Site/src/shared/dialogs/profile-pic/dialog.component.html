@@ -1,0 +1,22 @@
+<ng-container *ngIf="dialogVisible">
+    <p-dialog appendTo="body" modal="true" width="auto" [resizable]="false" [(visible)]="dialogVisible">
+        <article class="dialog-container">
+            <p><label class="dlgheader">Select Profile Picture</label></p>
+
+            <div class="file-upload">
+                <input id="custom-input" type="file" (change)="onFileChange($event)">
+            </div>
+
+            <img-cropper class="imgCrp"
+                #cropper
+                [image]="data"
+                [settings]="cropperSettings">
+            </img-cropper>
+                
+            <footer>
+                <input type="submit" value="Save" (click)="onSave($event)" />
+                <div class="mar-20 alert alert-danger" *ngIf="showSaveErrored">{{errors}}</div>
+            </footer>
+        </article>
+    </p-dialog>
+</ng-container>

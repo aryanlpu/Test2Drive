@@ -1,0 +1,70 @@
+<section class="job">
+    <article>
+        <div class="job-container projectAllContent">
+            <ul class="list-group">
+                <div class="list-container" *ngFor="let item of model.items">
+                    <li class="list-group-item clickable" (click)="onHire(item.id)">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-3 col-xl-3 nopadding">
+                                <div class="col-sm-3">
+                                    <span class="event-date">{{item.createdDate}}</span>
+                                    <div class="col-sm-12" style="padding-left: 0px;">
+                                        <div class=" bntbneathdate" style="float:left">
+                                            <a class="clickable" (click)="openCancelPopup()">
+                                                <img class="containerIMG" src="../assets/images/x-button.png" />
+                                            </a>
+                                        </div>
+                                        <div class=" bntbneathdate" style="float:Right">
+                                            <span class="offer"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 text-center">
+                                    <span class="hired-by-img">
+                                        <img [src]="getImageUrl(item.hireByProfileImageUrl)" alt="{{item.hiredByProfileName}}">
+                                    </span>
+                                </div>
+                                <div class="col-sm-3 hired-div text-center">
+                                    <span class="label label-job-types label-offer">offer</span>
+                                </div>
+                                <div class="col-sm-3 text-center">
+                                    <span class="hired-by-img">
+                                        <img [src]="getImageUrl(item.hiredProfileImageUrl)" alt="{{item.hiredProfileName}}">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6  col-lg-7 col-xl-7 proDesc">
+                                <div class="job-text">
+                                    <span class="hired-info">
+                                        <span class="text-bold">{{item.hiredProfileName}}</span>
+                                        <span> wants to hire you as a </span>
+                                        <span class="text-bold">{{item.crewRoles}}</span>
+                                        <span> for a </span>
+                                        <span class="text-bold">{{item.projectType}}.</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-lg-2 col-xl-2 text-right nopadding">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col-sm-4 text-right">
+                                        <span class=""></span>
+                                    </div>
+                                    <div class="col-sm-4 text-right">
+                                        <span class="offer circle-badge"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear clearfix"></div>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </article>
+    <div [ngClass]="noRecords ? 'no-record' : 'hide'">
+        No record to display.
+    </div>
+    <footer *ngIf="hasMoreJobs" class="area-footer">
+        <button (click)="getMoreRecords()" class="more">Load More</button>
+    </footer>
+</section>

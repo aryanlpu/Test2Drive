@@ -1,0 +1,18 @@
+<ng-container *ngIf="dialogVisible">
+    <p-dialog ngClass="terms-dialog" modal="true" width="auto"  [resizable]="false" [(visible)]="dialogVisible"
+        [closable]="false"> 
+        <p-header ngClsass="popup-header">
+                <h2>PDF Viewer</h2>
+            <span class="ij icon x-icon" (click)="dialogVisible=false"></span>  
+        </p-header>
+  
+            <div class="dialog-body">
+                <div class="row">
+                    <div class="col-md-12">
+                            <iframe class="pdf-container" [src]="pageurl" type="application/pdf"></iframe>
+                </div>
+            </div>
+            </div>
+
+        </p-dialog>
+</ng-container>

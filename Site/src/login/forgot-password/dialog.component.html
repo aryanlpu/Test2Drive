@@ -1,0 +1,37 @@
+<ng-container *ngIf="dialogVisible">
+    <p-dialog autoAlign="true" blockScroll="true" modal="true" ngClass="custom-dialog sm" [resizable]="false" [(visible)]="dialogVisible" [closable]="false">
+        <p-header ngClass="popup-header">
+            <h2>FORGOT YOUR PASSWORD?</h2>
+            <span class="ij icon x-icon" (click)="hideDialog()"></span>
+        </p-header>
+        <article class="dialog-container">
+            <form ij-form-validation #f="ngForm" (ngSubmit)="onSend(f)" (keydown.enter)="$event.preventDefault()" novalidate>
+                <ng-container *ngIf="!submitted; else sent">
+                    <div class="dialog-body">
+                        <p>Enter your email address, and we'll help you create a new password.</p>
+                        <input
+                            id="email" 
+                            type="text" 
+                            name="email"
+                            #focusable
+                            required 
+                            email 
+                            maxlength="256"
+                            [ij-input-validation]="'Please enter your email address.'"
+                            [(ngModel)]="model.email" 
+                            placeholder="Email"
+                            class="form-control"/>
+                        </div>
+                        <footer>
+                            <input type="submit" class="review" value="Submit" />
+                            <div class="mar-20 alert alert-danger" *ngIf="showSaveErrored">{{errors}}</div>
+                        </footer>
+                </ng-container>
+            </form>
+        </article>
+    </p-dialog>
+
+    <ng-template #sent>
+        <p class="text-center">Please check your email. We sent instructions to reset your password.</p>
+    </ng-template>
+</ng-container>

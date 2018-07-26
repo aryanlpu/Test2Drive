@@ -1,0 +1,87 @@
+@import '../shared/styles/mixins/fonts';
+
+.team {
+    text-align: center;
+    padding: 80px 0;
+
+    h2 {
+        margin: 25px 0 50px 0;
+        .font-light();
+
+        font-size: 50px;
+        color: #333333;
+        letter-spacing: 1px;
+        line-height: 26px;
+        text-transform: uppercase;
+    }
+
+    &:nth-of-type(odd) {
+        background-image: -webkit-linear-gradient(rgba(242,242,242,0.73) 0%, rgba(216,216,216,0.73) 100%);
+        background-image: -moz-linear-gradient(rgba(242,242,242,0.73) 0%, rgba(216,216,216,0.73) 100%);
+        background-image: -o-linear-gradient(rgba(242,242,242,0.73) 0%, rgba(216,216,216,0.73) 100%);
+        background-image: linear-gradient(rgba(242,242,242,0.73) 0%, rgba(216,216,216,0.73) 100%);
+    }
+    
+    table { 
+        margin: 0 auto; 
+        
+        td {
+            vertical-align: top;
+            padding-left: 1px;
+        }
+
+        tr.peeps td {
+            padding-top: 1px;
+
+            .hoverable {
+                position: relative;
+                cursor: pointer;
+
+                .hoverable-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: #000;
+                    opacity: 0.6;
+                    color: #fff;
+                    visibility: hidden;
+
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    overflow: hidden;
+                }
+
+                &:hover .hoverable-overlay {
+                    visibility: visible;
+                }
+            }
+            
+            footer {
+                margin-top: 20px;
+                
+                span { 
+                    text-transform: uppercase;
+                    display: block; 
+                }
+
+                .fullname {
+                    font-size: 22px;
+                    color: #3E3E3E;
+                    letter-spacing: 0.44px;
+                    line-height: 26px;
+                }
+
+                .position {
+                    margin-top: 5px;
+                    font-size: 14px;
+                    color: #8E8E8E;
+                    letter-spacing: 0.28px;
+                    line-height: 26px;
+                }
+            }
+        }
+    }
+}

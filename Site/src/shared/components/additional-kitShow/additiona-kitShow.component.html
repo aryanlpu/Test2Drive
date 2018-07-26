@@ -1,0 +1,27 @@
+
+ <form novalidate #f = "ngForm">
+    <div class="row kitList" *ngFor="let item of model">
+
+        <div class="col-sm-6 pr-4 description"><p><input [readonly]="(showId == item.kitId && descriptionReadOnly )?false:true"  (click)="showCheckIcon('description',item.kitId)"   [value]="item.description" name="description" placeholder="Description" type="text" class="form-control h40" 
+         > </p></div>   
+         <div class="col-sm-3 pl-3 padding-5">  
+        <div class = "input-group">
+                <span class = "input-group-addon">$</span>
+                <input  
+                    id = "rate" 
+                    name = "rate" 
+                    type = "text" 
+                    [readonly]="disabled"
+                    class = "ij-input form-control" 
+                    required 
+                    [value]="item.rate"
+                    [readonly]="(showId == item.kitId && rateReadOnly )?false:true"  (focus)="showCheckIcon('rate',item.kitId)"
+                    >
+               
+               
+            </div>
+            </div>
+            <div class="col-xs-1  pl-0 padding-5" *ngIf="(showId == item.kitId && rateReadOnly )?true:false"><button class="KitBtn" ><img  src="../../assets/images/check-mark-button.png"> </button></div>
+            <div class="col-xs-1 padding-5"><button class="KitBtn" (click)="removeKit(item.kitId,item.hireId)"><img src="../../assets/images/Circle X.png" > </button></div>
+    </div>
+</form>

@@ -1,0 +1,27 @@
+#how-it-works {
+    ul.steps {
+        list-style-type: none;
+
+        li {
+            h3 {
+                margin: 0 0 15px;
+                font-size: 26px;
+                color: @primary-orange;
+                letter-spacing: 0;
+            }
+
+            p {
+                .font-light();
+                font-size: 16px;
+            }
+
+            margin-bottom: 40px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    #how-it-works ul.steps {
+        margin-top: @section-spacing;
+    }
+}

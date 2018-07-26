@@ -1,0 +1,56 @@
+<ng-container *ngIf="dialogVisible">
+    <p-dialog modal="true" width="auto" ngClass="custom-dialog" [resizable]="false" [closable]="false" [(visible)]="dialogVisible">
+        <p-header ngClsass="popup-header">
+            <h2>Cancellation Request</h2>
+            <span class="ij icon x-icon" (click)="hideDialog()"></span>
+        </p-header>
+        <article class="dialog-container">
+            <form ij-form-validation #f="ngForm" (keydown.enter)="$event.preventDefault()" novalidate>
+                <header *ngIf="model.header">
+                    <div class="col-sm-12">
+                        <ij-dialog-header [model]="model.header" ></ij-dialog-header>
+                        <!-- <div class="mar-10 alert alert-default pull-left">
+                            "A Teacher's Obession" | Feature Film
+                        </div> -->
+                    </div>
+                </header>
+
+                <div class="dialog-body">
+                    <p> <b> {{model.header?.fullName}}</b> would like to mutually cancel this project.</p>
+                    <br/>
+                    <h4>Why they are cancelling</h4>
+                    
+                    <div class="relOpt">
+                            <span class="imgFitR">
+                                 
+                                    <input type="radio" name="rbContractor" > 
+                                    <span class="checkmarkRadioOtp"></span>
+                                </span>
+                        <span> We couldn't agree on job terms.</span></div>
+
+
+                    <!-- <div *ngFor="let option of cancelOptions">
+                        <p-radioButton name="groupname" styleClass="ij-checkbox" value="{{option.id}}" label="{{option.message}}" [(ngModel)]="model.cancelOption"></p-radioButton>
+                    </div> -->
+                    <!-- <p-radioButton name="groupname" styleClass="ij-checkbox" value="" label="Other" [(ngModel)]="model.cancelOption"></p-radioButton> -->
+                    <textarea *ngIf="!model.cancelOption" id="message" name="message" #focusable required maxlength="512" cols="60" rows="5" [ij-input-validation]="'Please enter a message.'"
+                        [(ngModel)]="model.message" class="form-control"></textarea>
+                    <label class="footer-text">Do you agree to mutual cancellation? If yes, the other user is not penalized.If no, the other user will
+                        be penalized per the Industry Jump cancellation policy.
+                        <span class="text-orange">See cancellatin panelties here.</span>
+                    </label>
+                </div>
+
+                <footer>
+                    <input class="button confirm" (click)="mutualCancel(f)" type="submit" value="Yes, Confirm Mutual Cancellation" />
+                    <input class="button deny" type="submit" value="Deny, Mutual Cancellation" />
+                    <div class="mar-20 alert alert-danger" *ngIf="showSaveErrored">
+                        <ul>
+                            <li *ngFor="let error of errors">{{error}}</li>
+                        </ul>
+                    </div>
+                </footer>
+            </form>
+        </article>
+    </p-dialog>
+</ng-container>

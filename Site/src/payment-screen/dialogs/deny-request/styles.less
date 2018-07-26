@@ -1,0 +1,103 @@
+@import '../../../shared/dialogs/styles/common';
+@import '../../../shared/styles/variables/all';
+.custom-dialog ::ng-deep .ui-dialog {
+    max-width: 750px;
+    .on-desktop({ 
+        min-width: 750px!important;
+      });
+      .dialog-container{
+        header{padding:0px;margin-left:auto!important;
+            margin-right: auto!important;
+            max-width: 410px;
+            width: 100%;
+            .headingWith{width: 80%;
+                max-width: 330px;}
+            }
+      }
+      article{
+          .dialog-body{
+              padding: 0 50px;
+              p{
+                font-size: 18px;
+                font-weight: bold;
+              }
+              h4{
+                  line-height: 22px;
+                  font-size: 18px;
+                  color: #4A4A4A;
+                  letter-spacing: 0px;
+                  margin-bottom: 30px;
+              }
+          }
+        img{
+            height: 63px!important;
+            width: 63px!important;
+        }
+      }
+      article .details{
+          h1{
+              font-size: 20px!important;
+          }
+          .budgets{
+          display: none;
+      }
+      .loc{
+          font-size: 10.61px!important;
+      }
+      .roles{
+          font-size: 14.14px!important;
+
+      }
+    }
+
+    .ui-dialog-titlebar{
+        border-top: 8px solid @primary-red;
+        h2{
+            width: 100%; 
+        }
+    }
+    .ui-dialog-content{
+        header{
+            margin-left:31%;
+        }
+        .dialog-container{
+            padding: 0 40px 0px 40px;
+            .dialog-body{
+                margin-bottom: 10px;
+            }
+        }
+    }
+    p-footer{
+        border: 0;
+        text-align: center;
+        width: 100%;
+  
+        .deny{
+            background: @primary-red;
+        }
+    }
+    input[type="submit"] {
+    width: 20%;
+    border-radius: 5px;
+    color: #fff;
+    margin: 22px auto 30px;
+    display: block;
+}
+.ui-dialog-footer{
+border: none!important;
+}
+}
+.headingWith
+{
+    max-width: 100%;
+    background-color: #ffb3bc !important;
+    line-height: 3;
+    padding: 1px 10px 0px 8px;
+    border-radius: 5px;
+    top: -10px;
+    position: relative;
+
+}
+
+
+

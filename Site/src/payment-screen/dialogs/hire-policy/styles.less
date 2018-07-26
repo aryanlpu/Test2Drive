@@ -1,0 +1,40 @@
+@import '../../../shared/dialogs/styles/common';
+@import '../../../shared/styles/variables/all';
+
+.custom-dialog ::ng-deep .ui-dialog {
+    max-width: 750px;
+    .ui-dialog-titlebar{
+        border-top: 8px solid #3F93F5;
+        h2{
+            width: 100%; 
+        }
+    }
+    .ui-dialog-content{
+        header{
+            margin-left:31%;
+        }
+        .dialog-container{
+            padding: 0 40px 0px 40px;
+            .dialog-body{
+                margin-bottom: 10px;
+            }
+        }
+    }
+        .ui-dialog-footer{
+        border: 0;
+        text-align: center;
+        width: 100%;
+        .accept{
+            background: @primary-blue;
+        }
+        .deny{
+            background: #9B9B9B;
+            margin-right: 5%;
+        }
+    }
+    input[type="submit"] {
+    width: 20%;
+    border-radius: 5px;
+    color: #fff;
+}
+}

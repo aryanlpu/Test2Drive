@@ -1,0 +1,125 @@
+<header id="hero" class="{{ mode }} auth-container" [ngClass]="{ 'loggedIn': isLoggedIn }">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <!-- hero navigation -->
+        <div id="hero-nav">
+          <!--TODO:Change-->
+          <a class="no-outline" routerLink="/">
+            <img class="sm brand" src="../assets/images/ij-white.png" alt="Industry Jump" />
+            <br />
+            <label class="beta-version">Beta</label>
+          </a>
+          <ij-site-menu (quickSearchEvent)="onToggleQuickSearch()"></ij-site-menu>
+        </div>
+        <!-- end of hero navigation -->
+      </div>
+    </div>
+  </div>
+
+  <!-- quick search -->
+  <ij-quick-search #quicksearch *ngIf="showQuickSearch" [@fadeInOut]></ij-quick-search>
+  <!-- end of quick search -->
+
+  <div id="hero-body">
+    <div class="hide-on-desktop">
+      <h1>{{title}}</h1>
+    </div>
+    <div class="show-on-desktop">
+      <h1>{{title}}</h1>
+    </div>
+    <div class="show-on-full-mode">
+      <h2>A hiring platform for top-tier filmmakers</h2>
+    </div>
+    <div class="button-group show-on-full-mode">
+      <a id="play-btn" href="https://vimeo.com/273414866?autoplay=1" data-lity>
+        <button class="secondary" type="button">Learn More</button>
+      </a>
+      <a routerLink="/signup">
+        <button class="secondary" type="button">Apply Now</button>
+      </a>
+    </div>
+    <div class="clearfix"></div>
+    <!-- full search body -->
+    <div class="search-container homeFrmCtrl">
+      <form #f="ngForm" (ngSubmit)="onSearch(f.form); $event.preventDefault();" id="hero-fsearch-body" autocomplete="off">
+        <div class="posRelative">
+          <img src="../assets/images/icon-search-gray.png" class="search-icon" alt="Search" />
+
+          <input type="text" auto-complete [source]="roles" max-num-list="5" [(ngModel)]="model.role" name="role" [ij-rotating-placeholder]="placeholders"
+                 id="search-input" #role="ngModel" required (ngModelChange)="onRoleSelect($event)" [class.error]="submitted && role.errors?.required"
+                 [ij-focus]="roleHasFocus" [placeholder]="placeholders[0]" />
+          <span (click)="onClear()" class="ij icon x-icon autocomplete-cross hgh" [class.x-icon]="model.role"></span>
+        </div>
+        <!-- [required]="searchByOrganization" -->
+        <div class="posRelative" *ngIf="budget">
+          <img src="../assets/images/icon-search-gray.png" class="search-icon budget" alt="Search" />
+
+          <p-autoComplete class="inputCtrl" id="search-budget-autocomplete" [required]="budget" name="searchbudget" #searchbudget="ngModel" [class.error]="submitted && searchbudget.errors?.required"
+                          placeholder="Budgets" autoHighlight="true" forceSelection="true" dropdown="true" [(ngModel)]="model.budget"
+                          [suggestions]="allBudgetSuggestions" (completeMethod)="onBudgetsKeyDown($event)" (ngModelChange)="onBudgetSelect($event)" [multiple]="false">
+          </p-autoComplete>
+
+        </div>
+
+        <div class="posRelative" *ngIf="city">
+          <img src="../assets/images/icon-search-gray.png" class="search-icon city" alt="Search" />
+          <p-autoComplete class="inputCtrl city-textbox" id="search-state-autocomplete" [required]="city" name="location" #location="ngModel" [class.error]="submitted && location.errors?.required"
+                          placeholder="City, State" autoHighlight="searchByOrganization" forceSelection="true" dropdown="true" [(ngModel)]="model.location" (ngModelChange)="onCityStateSelect($event)"
+                          [suggestions]="allCitiesSuggestions" (completeMethod)="onCitiesKeyDown($event)" [multiple]="false">
+          </p-autoComplete>
+        </div>
+
+        <div class="posRelative" *ngIf="isTrue">
+          <img src="../assets/images/icon-search-gray.png" class="search-icon organisation" alt="Search" />
+          <p-autoComplete class="inputCtrl" [required]="isTrue" id="search-organization-autocomplete" name="organization" #organization="ngModel" [class.error]="submitted && organization.errors?.required"
+                          placeholder="Groups/ Organization" autoHighlight="true" forceSelection="true" [(ngModel)]="model.organizationName" dropdown="true"
+                          [suggestions]="allOrganizationSuggestions" (completeMethod)="onOrganizationKeyDown($event)" (ngModelChange)="checkOrganizaation()" [multiple]="false">
+          </p-autoComplete>
+        </div>
+
+        <div class="posRelative" *ngIf="!isTrue">
+          <table class="editAbleSearch">
+            <tr>
+              <td class="td10">
+                <div class="btn-wrap">
+                  <button type="button" *ngIf="minusBtn" (click)="removeOrganization()" class="organization">
+                    <span class="removeOrganization">-</span>
+                  </button>
+                </div>
+              </td>
+              <td class="td80"><input type="submit" id="search-btn" value="Search" /></td>
+              <td class="td10">
+                <button type="button" (click)="addOrganization()" class="organization plus-btn ml10">
+                  <span>+</span>
+                </button>
+              </td>
+
+            </tr>
+          </table>
+
+        </div>
+
+        <div class="posRelative" *ngIf="isTrue">
+          <table class="editAbleSearch">
+            <tr>
+
+              <td class="td10">  <button type="button" (click)="removeOrganization()" class="organization"><span class="removeOrganization">-</span></button></td>
+              <td class="td80">       <input type="submit" id="search-btn" value="Search" /></td>
+              <td class="td10">
+                <div class="btn-wrap"></div>
+              </td>
+            </tr>
+          </table>
+
+
+        </div>
+
+
+      </form>
+      <!-- end full search body -->
+
+    </div>
+  </div>
+  <p-confirmDialog ngClass="custom-confirm" acceptLabel="Ok" appendTo="body"></p-confirmDialog>
+</header>

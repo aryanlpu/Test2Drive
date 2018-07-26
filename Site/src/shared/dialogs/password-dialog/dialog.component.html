@@ -1,0 +1,65 @@
+<!-- <ng-container *ngIf="dialogVisible">
+    <p-dialog modal="true" modal="modal" width="auto" ngClass="custom-dialog" [resizable]="false" [closable]="false" [(visible)]="dialogVisible">
+     
+        <p-header ngClsass="popup-header">
+            <h2>PLEASE SIGN IN AGAIN FOR ADDED SECURITY</h2>
+            <span class="ij icon x-icon" (click)="onCancel()"></span>
+        </p-header>
+       
+        <article class="dialog-container">
+                <form #f="ngForm" (ngSubmit)="login(f.form.valid)" novalidate autocomplete="off">
+            <div class="dialog-body">
+              
+                    <input #password="ngModel" type="password" name="password" [(ngModel)]="credentials.password" placeholder="Password" required maxlength="100" />
+                    
+            </div>
+       
+                <p-footer>
+                        <input type="button" (click)="onCancel()" class="btn deny" value="Cancel" />
+                        <input type="submit"  class="btn accept" value="Save" />
+
+                        <div class="validation-summary group" [ngClass]="{ 'hidden': !error }">
+                                {{error}}
+                                </div>
+                    </p-footer>
+     
+                    </form>
+                </article>
+   
+    </p-dialog>
+    
+</ng-container> -->
+
+
+
+
+
+<ng-container *ngIf="dialogVisible">
+        <p-dialog autoAlign="true" blockScroll="true" modal="true" ngClass="custom-dialog" [closable]="false" [resizable]="false" [(visible)]="dialogVisible">
+            <p-header ngClsass="popup-header">
+                <h2>PLEASE SIGN IN AGAIN FOR ADDED SECURITY</h2>
+                <span class="ij icon x-icon" (click)="onCancel()"></span>
+            </p-header>
+            <article class="dialog-container">
+                    <form #f="ngForm" (ngSubmit)="login(f.form.valid)" novalidate autocomplete="off">
+                  
+                    <div class="dialog-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    <input #password="ngModel"   [ij-input-validation]="'Enter a password'" class="form-control" type="password" name="password" [(ngModel)]="credentials.password" placeholder="Password" required maxlength="100" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer>
+                            <input type="button" (click)="onCancel()" class="btn deny" value="Cancel" />
+                            <input type="submit"  class="btn accept" value="Save" />
+                        <div class="mar-20 alert alert-danger" [ngClass]="{ 'hidden': !error }">
+                            {{error}} 
+                        </div>
+                    </footer>
+                </form>
+            </article>
+        </p-dialog>
+    </ng-container>

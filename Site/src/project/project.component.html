@@ -1,0 +1,55 @@
+<ij-site-subheader></ij-site-subheader>
+<header id="page-header">
+    <div class="jumbo">
+        <h1>Projects</h1>
+    </div>
+    <nav class="tabs row" style="margin-right:auto;margin-left:auto;">
+
+        <div class="title col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <button (click)="onNewProject()" class="new-project">
+                <span>+</span>
+            </button>
+            <span> Project</span>
+        </div>
+        <div class="col-sm-12  col-md-7  col-lg-7 col-xl-7">
+            <ul>
+                <li>
+                    <a routerLinkActive="active" routerLink="/project/all">All Jobs</a>
+                </li>
+                <li *ngIf="projectTabs.showOffers">
+                    <a routerLinkActive="active" routerLink="/project/offers">Offers</a>
+                </li>
+                <li *ngIf="projectTabs.showAcceptedJobs">
+                    <a routerLinkActive="active" routerLink="/project/accepted">Accepted Jobs</a>
+                </li>
+                <li *ngIf="projectTabs.showPreviousJobs">
+                    <a routerLinkActive="active" routerLink="/project/previous">Previous Jobs</a>
+                </li>
+                <li *ngIf="projectTabs.showCancelledJobs">
+                    <a routerLinkActive="active" routerLink="/project/cancelled">Cancelled Jobs</a>
+                </li>
+                <li *ngIf="projectTabs.showHiredJobs">
+                    <a routerLinkActive="active" routerLink="/project/Hired">Hired Jobs</a>
+                  </li>
+                <li>
+
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-12  col-md-1 col-lg-2 col-xl-2 headdownloadbtn ">
+
+            <a href="#">
+                <img src="../assets/images/DownloadIcon.png" />
+            </a>
+
+        </div>
+    </nav>
+</header>
+<ij-project-dialog></ij-project-dialog>
+<div class="projects-container container">
+    <router-outlet></router-outlet>
+</div>
+<ij-site-footer></ij-site-footer>
+<ij-reqhire-profile-dialog></ij-reqhire-profile-dialog>
+<ij-mutual-cancellation-dialog></ij-mutual-cancellation-dialog>
+<ij-request-cancellation-dialog></ij-request-cancellation-dialog>

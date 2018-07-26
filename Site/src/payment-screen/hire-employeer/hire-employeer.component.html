@@ -1,0 +1,135 @@
+<div>
+    <div class="row hire-screen">
+
+    <!-- Contactor/Contactee -->
+        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 col1"  >
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <h1>CONTRACTOR</h1> 
+                </div> 
+                
+                <div class="col-sm-4 notation"><a href="/profile/{{modelData.profileHireSysID}}/overview"><img  src="{{getImageUrl(modelData.hireByProfileImageUrl)}}" class="img-circle img-responsive" /></a></div>
+                <div class="col-sm-8">
+                    <h2><a href="/profile/{{modelData.profileHireSysID}}/overview">{{modelData.hiredByProfileName}}</a></h2>
+                    <h3>{{ modelData.crewRoleList }}</h3>
+                  <p>{{modelData.locations }}</p>
+                  </div>
+            </div>
+            <div class="row mt178">
+                <div class="col-sm-12">
+                    <h1>CONTRACTEE</h1> 
+                </div> 
+                <div class="col-sm-4">
+                        <a href="/profile/{{modelData.profileToHireSysID}}/overview"><img src="{{getImageUrl(modelData.hiredProfileImageUrl)}}" class="img-responsive img-circle" /></a></div>
+                <div class="col-sm-8">
+                    
+                    <h2><a href="/profile/{{modelData.profileToHireSysID}}/overview">{{modelData.hiredProfileName}}</a></h2>
+                    <h3>{{modelData.hiredCrewRoleList}}</h3>
+                    <p>{{modelData.hiredLocations}}</p>
+                </div>
+                 
+            </div>
+        </div>
+    <!-- End Contractor/Contractee -->
+
+    <!-- Hire Detail -->
+        <div class="col-sm-12  col-md-6  col-lg-7 col-xl-7 col2"  *ngIf="modelData.id != hireId" >
+            <h1>{{modelData.hiredByProfileName}}, {{modelData.hiredProfileName}} is reviewing your terms.</h1> 
+            <p>You have sent a hire request to <span><a href="/profile/{{modelData.profileHireSysID}}/overview">{{modelData.hiredProfileName}}</a></span> for a Commercial. The project details are listed below. <span><a href="/profile/{{modelData.profileHireSysID}}/overview">{{modelData.hiredProfileName}}</a></span>  is currently reviewing the project and rate. Please wait for their response to proceed. </p>
+    
+            <h2>Project Details</h2>
+            <div class="row"> 
+                <div class="col-sm-12 col-md-6 col-lg-4"><p>{{modelData.projectType}}</p></div>
+                <div class="col-sm-12 col-md-6 col-lg-4">{{modelData.rate | currency  }}/{{modelData.rateType}} </div>
+            </div>
+            <div class="row"> 
+                <div class="col-sm-12 col-md-6 col-lg-4"><p>Prep Day</p></div>
+                <div class="col-sm-12 col-md-6 col-lg-4"><span *ngFor="let d of modelData.prepDay;let count=index">{{ d | date : 'M/d/yy' }} <span *ngIf="count < modelData.prepDay.length-1"> , </span>  </span></div>				 
+            </div>
+            <div class="row"> 
+                <div class="col-sm-12 col-md-6 col-lg-4"><p>Shoot Date</p></div>
+                <div class="col-sm-12 col-md-6 col-lg-4"><span *ngFor="let d of modelData.shootDay;let count=index"> {{ d | date : 'M/d/yy'}} <span *ngIf="count < modelData.shootDay.length-1"> , </span></span> 
+                </div>	
+                             
+            </div>
+            <div class="row"> 
+                <div class="col-sm-12 col-md-6 col-lg-4"><p>Wrap Day</p></div>
+                <div class="col-sm-12 col-md-6 col-lg-4"><p>{{modelData.wrapDay | date: 'M/d/yy'}}</p></div>				 
+            </div>
+    
+            <div class="row"> 
+                <div class="col-sm-12 col-md-6 col-lg-4"><p>Role</p></div>
+                <div class="col-sm-12 col-md-6 col-lg-6"><p>{{modelData.crewRoles}}</p></div>				 
+            </div>
+            <div class="row"> 
+                <div class="col-sm-12 col-md-6 col-lg-4"><p>{{modelData.city}}</p></div>
+                <div class="col-sm-12 col-md-6 col-lg-4"><p>{{modelData.state}}</p></div>				 
+            </div>
+            <div class="row"> 
+                <div class="col-sm-12 col-md-6 col-lg-4"><p>Payment Delivery</p></div>
+                <div class="col-sm-12 col-md-6 col-lg-4"><p>{{modelData.paymentDate | date: 'M/d/yy' }}</p></div>				 
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-4"><p class="mt-9">Payment Method</p></div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <!-- <p><span><a href="javascript:void();">Link your bank account</a></span></p> -->
+             
+                            <p> <select 
+                            id="paymentMethod" 
+                            name="paymentMethod" 
+                            class="form-control">
+                            <option disabled value="0">ACH Deposite</option>
+                            <option>ACH Deposite</option>
+                            <option>ACH Deposite</option>
+                            <option>ACH Deposite</option>
+                            </select>
+                            </p>
+                   
+                </div>				 
+            </div>
+            
+             <div class="row"> 
+                <div class="col-sm-12 col-md-6 col-lg-4"><button class="denyBtn">Cancel Hire Request</button></div>				 
+            </div>
+            <div class="row"> 
+                <div class="col-sm-12"><span class="tip">Tip:</span><span class="tipcontent"> accept rate to move onto payment terms</span></div>				 
+            </div>
+            <div class="row"> 
+                    <div class="col-sm-12">&nbsp;
+                    </div>
+                </div>
+        </div>
+    <!-- End Hire Detail -->
+
+     <!-- Invoice --> 
+     <div class="col-sm-12  col-md-2 col-lg-2 col-xl-2 col3" *ngIf="modelData.id != hireId" >
+            <div class="row">
+                 <div class="col-sm-12 mt130"  *ngIf="!disabledOpacity"><h1>Required W9</h1></div>
+                 <div class="col-sm-12 mt130" *ngIf="disabledOpacity"><h1>W9 not Required</h1></div>
+            </div>
+            <div class="row">
+                <div class="thumbnail col-sm-4 mini-130" [class.decreaseOpacity]="disabledOpacity" [class.increaseOpacity]="enabledOpacity"  (click)="showpdfDialog()">
+                            <pdf-viewer [src]="pdfSrc | safe"
+                                        [page]="page"
+                                        [original-size]="false"
+                                        style="display: block;"
+                             ></pdf-viewer>
+                </div>
+                 <!-- <div class="col-sm-4 mini-130"><img src="../assets/accept_hireImages/img2.jpg" [class.decreaseOpacity]="disabledOpacity" [class.increaseOpacity]="enabledOpacity"  (click)="showpdfDialog()"/></div> -->
+                 <div class="col-sm-4 mini-130" *ngIf="!disabledOpacity"><img src="../assets/images/Circle X.png" (click)="decreateOpacity()" /></div>
+                 <div class="col-sm-4 mini-130" *ngIf="disabledOpacity"><img src="../assets/images/PlusButton.png"  (click)="increaseOpacity()"  /></div>
+                 
+                
+            </div>
+        </div>
+    <!-- End Invoice -->
+
+ 
+      
+    </div>
+    </div>
+    
+    <div *ngIf="modelData == undefined">
+    Record not found
+    </div>
+    <ij-view-pdf-dialog [pageUrl]="pageurl"></ij-view-pdf-dialog>

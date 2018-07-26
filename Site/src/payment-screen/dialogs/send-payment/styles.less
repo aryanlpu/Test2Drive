@@ -1,0 +1,125 @@
+@import '../../../shared/dialogs/styles/common';
+@import '../../../shared/styles/variables/all';
+
+.custom-dialog ::ng-deep .ui-dialog {
+    max-width: 750px;
+    .on-desktop({ 
+            min-width: 750px!important;
+    });
+    article{
+        .dialog-body{
+            padding: 0 50px;
+            p{
+              font-size: 18px;
+              font-weight: bold;
+              margin-bottom: 35px;
+            }
+        }
+      img{
+          height: 63px!important;
+          width: 63px!important;
+      }
+    }
+    article .details{
+        h1{
+            font-size: 20px!important;
+        }
+        .budgets{
+        display: none;
+    }
+    .loc{
+        font-size: 10.61px!important;
+    }
+    .roles{
+        font-size: 14.14px!important;
+
+    }
+  }
+    .ui-dialog-titlebar{
+        border-top: 8px solid @btn-availability-color;
+        h2{
+            width: 100%; 
+        }
+    }
+    .ui-dialog-content{
+        height: auto!important;
+        header{
+            margin-left:31%;
+        }
+
+
+        .dialog-container{
+            padding: 0 35px;
+            .dialog-body{
+                margin-bottom: 10px;
+                p.header-title
+                {
+                    font-family: lato;
+                    font-weight: bold;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+        .ui-dialog-footer{
+        border: 0;
+        text-align: center;
+        width: 100%;
+        .expenseBtn{
+            background: @primary-blue;
+        }
+        .reportBtn{
+            background:@btn-refer-color;
+        }
+        .sendBtn{
+            background: @btn-availability-color;
+        }
+    }
+    input[type="submit"] {
+    width: 20%;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.expenseBtn,.reportBtn,.sendBtn
+{
+    border-radius: 5px;
+    width:100%;
+    height:42px;
+    font-family: Lato,sans-serif;
+    margin:30px 0 20px;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 19px;
+    font-weight: 700;
+    border:none
+}
+}
+.col-sm-offset-3-c{
+      margin-left: 22%;
+}
+.gap{
+    margin-bottom: 30px;
+    .col-md-3{
+        width: 28%;
+    }
+}
+
+    a.late-fee{
+        text-decoration: none;
+        color: @primary-blue;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .margin-bottom-30{
+        margin-bottom: 30px;
+    }
+    .ui-calendar > .ui-inputtext {
+        width: 80%!important;
+        height: 25px!important;
+    }
+
+
+
+    

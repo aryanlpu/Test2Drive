@@ -1,0 +1,92 @@
+<ng-container *ngIf="dialogVisible">
+                <p-dialog modal="true" modal="modal" width="auto" ngClass="custom-dialog" [resizable]="false" [closable]="false" [(visible)]="dialogVisible">
+                    <p-header ngClsass="popup-header">
+                        <h2>{{ title }}</h2>
+                        <span class="ij icon x-icon" (click)="dialogVisible=false"></span>
+                    </p-header>
+                    <article class="dialog-container">
+                    <header *ngIf="model.header">
+                        <ij-dialog-header [model] = "model.header"></ij-dialog-header>
+                    </header>
+                            <div class="dialog-body">
+                                            <div class="row">
+                                                    <div class="col-md-12">            
+                                                    <p>{{ description }}</p>
+                                                    <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-3-c"><span>Payment Sent</span></div>
+                                                            <div class="col-sm-4 hirePadding"><span>
+                                                                <p-calendar 
+                                                                    id = "paymentDate" 
+                                                                    name = "paymentDate" 
+                                                                    appendTo = "body" 
+                                                                    readonlyInput = "readonlyInput" 
+                                                                    placeholder = "Select..."
+                                                                    [(ngModel)] = "paymentDate"
+                                                                >
+                                                                </p-calendar>
+                                                            </span> </div>
+                                                          </div>
+                                                          <div class="row">
+                                                              <div class="col-sm-3 col-sm-offset-3-c"><span>Payment Delivered</span></div>
+                                                              <div class="col-sm-4 hirePadding"><span>
+                                                                <p-calendar 
+                                                                id = "paymentDate" 
+                                                                name = "paymentDate" 
+                                                                appendTo = "body" 
+                                                                readonlyInput = "readonlyInput" 
+                                                                placeholder = "Select..."
+                                                                [(ngModel)] = "paymentDelivery"
+                                                            >
+                                                            </p-calendar>
+                                                              </span> </div>
+                                                          </div>
+                                                          <div class="row">
+                                                              <div class="col-sm-3 col-sm-offset-3-c"><span>Payment amount</span></div>
+                                                              <div class="col-sm-5"><span>$250</span> </div>
+                                                          </div>
+                                                          <div class="row">
+                                                              <div class="col-sm-3 col-sm-offset-3-c"><span>Payment Account</span></div>
+                                                              <div class="col-sm-5"><span>Bank account ending in 9898</span> </div>
+                                                          </div>
+                                                        <!-- <div>
+                                                        By clicking report, your message will be sent to one of our admins. We will then contact you to discuss the situation further, Responses usually  take 24-48 hours.
+                                    
+                                                        </div> -->
+                                                    </div>
+                                </div>
+                                </div>
+                    </article>
+                    <p-footer *ngIf="isPaymentPending">
+                            <div class="row gap">
+                                <div class="col-sm-12 col-md-3  col-md-offset-1 centered">
+                                    <button class="expenseBtn" (click)="addExpense()">Add Expense</button>
+                                </div>
+                                <div class="col-sm-12 col-md-3 centered">
+                                    <button class="sendBtn" (click)="onSend()">Send Payment</button>
+                                </div>
+                                <div class="col-sm-12 col-md-3 centered">
+                                    <button class="reportBtn" (click)="onReportProblem()" >Report Incident</button>
+                                </div>
+                            
+                            </div>
+                            <div class="row margin-bottom-30">
+                                    <div class="col-sm-12"><p><a class="late-fee" (click)="lateFeePolicy()">Late fees</a> will apply if payment is not submitted by today as it will result in a late payment.</p></div>
+                                </div>
+                        </p-footer>
+                        <p-footer *ngIf="!isPaymentPending">
+                            <div class="row gap">
+                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 centered">
+                                </div>
+                               
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 centered">
+                                    <button class="sendBtn" (click)="onSend()">Send Payment</button>
+                                </div>
+                
+                            </div>
+                            <div class="row margin-bottom-30">
+                                    <div class="col-sm-12"><p><a class="late-fee" (click)="lateFeePolicy()">Late fees</a> will apply if payment is not submitted by today as it will result in a late payment.</p></div>
+                                </div>
+                        </p-footer>
+                      
+                </p-dialog>
+            </ng-container>

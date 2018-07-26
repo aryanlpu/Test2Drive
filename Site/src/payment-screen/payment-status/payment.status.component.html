@@ -1,0 +1,131 @@
+<div class="row paymentStatus">
+    <div class="col-sm-12 centered ml-43 mt-15">
+        <span class="greenhead">Completed Documents</span>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">&nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-2 col-sm-offset-1 ml-135">
+            <div class="col-sm-12 col1 text-center">
+                <img src="../assets/accept_hireImages/img1.jpg" />
+            </div>
+            <div class="col-sm-12 col1 text-center">
+                <a href="">Click to View Invoice</a>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="col-sm-12 col1  text-center">
+                    <p-lightbox type="content">
+                            <a class="group w9Img" href="#">
+                                <img src="../assets/accept_hireImages/w9.jpg" [class.decreaseOpacity]="disabledOpacity" [class.increaseOpacity]="enabledOpacity" />
+                            </a>
+                            <iframe width="600" height="700" src="https://docs.google.com/viewer?url=https://ijdevstorage.blob.core.windows.net/pdfs/fe1140ac-bfa3-4ff6-b5ac-427ee5aae2f6.pdf&embedded=true" frameborder="0" allowfullscreen></iframe>
+                        </p-lightbox>
+                <!-- <img src="../assets/accept_hireImages/img2.jpg" /> -->
+            </div>
+            <div class="col-sm-12 col1  text-center">
+                <a href="">Click to View W9</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">&nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">&nbsp;
+        </div>
+    </div>
+    <div class="row mt-20">
+        <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3  col1">
+            <h1>CONTRACTOR</h1>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4  col2">
+                    <a href="/profile/{{modelData.profileHireSysID}}/overview"><img src="{{getImageUrl(modelData.hireByProfileImageUrl)}}" /></a>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                <div class="head1"><a href="/profile/{{modelData.profileHireSysID}}/overview">{{modelData.hiredByProfileName}}</a></div>
+                <div class="head2">{{ modelData.crewRoleList }}</div>
+                <div class="head3">{{ modelData.locations }}</div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <div class="row">
+                <div class="col-sm-3">&nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">&nbsp;
+                </div>
+            </div>
+            <!-- <div class="text-center status-buttons">
+                <a href="javscript:void()" class="active">
+                        <i class="is55">February 10th, 2018</i>
+                    <span>&nbsp;</span> <i>Hire Accepted</i></a>
+                <a href="javscript:void()" class="active">
+                        <i class="is55">February 10th, 2018</i>
+                    <span>&nbsp;</span> <i>Payment Made</i></a>
+                <a href="javscript:void()" class="deactive">
+                        <i class="is55"></i>
+                    <span>&nbsp;</span> <i></i></a>
+            </div> -->
+            <div class="text-center status-buttons">
+                <a href="javscript:void()" class="active">
+                        <i class="is55">February 10th, 2018</i>
+                    <span>&nbsp;</span> <i>Hire Accepted</i></a>
+                <a href="javscript:void()" class="deactive">
+                        <i class="is55"> </i>
+                    <span>&nbsp;</span> <i> </i></a>
+                <a href="javscript:void()" class="deactive">
+                        <i class="is55"></i>
+                    <span>&nbsp;</span> <i></i></a>
+            </div>
+            <div class="row">
+                    <div class="col-sm-3">&nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">&nbsp;
+                    </div>
+                </div>
+        </div>
+        <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 col1">
+            <h1>CONTRACTEE</h1>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col2">
+                    <a href="/profile/{{modelData.profileToHireSysID}}/overview"> <img src="{{getImageUrl(modelData.hiredProfileImageUrl)}}" /></a>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 notation">
+                <div class="head1"><a href="/profile/{{modelData.profileToHireSysID}}/overview">{{modelData.hiredProfileName}}</a></div>
+                <div class="head2">{{modelData.hiredCrewRoleList}}</div>
+                <div class="head3">{{modelData.hiredLocations}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2  col-lg-offset-1 centered">
+            <button class="messageBtn">Message Michael D.</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 centered">
+            <button class="expenseBtn" (click)="addExpense()">Add Expense</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 centered">
+            <button class="downloadBtn" (click)="onSend()">Send Payment</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 centered">
+            <button class="reportBtn" (click)="onReportProblem()" >Report Incident</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 centered">
+            <button class="cancelBtn" (click)="onCancelDialog()" >Cancel Job</button>
+        </div>
+    </div>
+
+    <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 centered">
+                   <a class="cancellink" (click)="onCancelation()">Have questions about Industry Jumps cancelation policy?</a>
+            </div>
+    </div>
+
+</div>

@@ -1,0 +1,42 @@
+    <ng-container *ngIf="dialogVisible">
+            <p-dialog modal="true" modal="modal" width="auto" ngClass="custom-dialog" [resizable]="false" [closable]="false" [(visible)]="dialogVisible">
+                <p-header ngClsass="popup-header">
+                    <h2>DENY</h2>
+                    <span class="ij icon x-icon" (click)="dialogVisible=false"></span>
+                </p-header>
+                <article class="dialog-container">
+                <header *ngIf="model.header">
+                    <ij-dialog-header [model] = "model.header"></ij-dialog-header>
+                    <div class="headingWith"><span> Project Title </span> | <span>Project Type</span> </div>
+                </header>
+                        <div class="dialog-body">
+                                        <div class="row">
+                                                <div class="col-md-12">   
+                                                <h4>Please tell us why you are denying this job.</h4>             
+                                                <p>Why they are canceling?</p>
+                                                <div><input type="radio" name="rbContractor" > <span> We couldn't agree on job terms.</span></div><br>
+                                                <div><input type="radio" name="rbContractor" > <span> I'm unavailable for this job.</span></div><br>
+                                                <div><input type="radio" name="rbContractor" > <span> I don't want to work on this type of project.</span></div><br>
+                                                <div><input type="radio" name="rbContractor" > <span> I'm currently located out of the area.</span></div>
+                                               <br> <div>
+                                                <textarea 
+                                                id = "message" 
+                                                name = "message" 
+                                                class = "form-control" 
+                                                rows = "5" 
+                                                maxlength = "52" 
+                                                ></textarea>
+                                                    </div>
+                                                    <div>
+                                                            Sorry, we couldn’t make this job work. Please contact me again in the future should you need anyone else. Thanks!
+                                
+                                                    </div>
+                            </div>
+                            </div>
+                            </div>
+                </article>
+                <p-footer>
+                        <input type="submit" (click)="onReport()" class="btn deny" value="Deny" />
+                    </p-footer>
+            </p-dialog>
+        </ng-container>

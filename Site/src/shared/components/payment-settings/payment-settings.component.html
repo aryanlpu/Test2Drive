@@ -1,0 +1,460 @@
+<div *ngIf="intt==0" class="top">
+
+</div>
+<div *ngIf="init==0">
+
+  <header id="payment-header" *ngIf="!activePaymentOption && !hasPayment">
+    <h1>ENABLE PAYMENTS WITH INDUSTRY JUMP</h1>
+    <ng-container *ngTemplateOutlet="addPaymentOption"></ng-container>
+    <div class="row paymentStatus">
+      <div class="row">
+        <div class="col-sm-12">
+          <span class="feature">
+            Free to send payment with ACH<span class="checkmark">&#10003;</span>
+            5% fee to recieve payments<span class="checkmark">&#10003;</span>
+            Direct Deposit<span class="checkmark">&#10003;</span>
+            Automated Bookkeeping<span class="checkmark">&#10003;</span>
+            Free 1099 Reporting
+          </span>
+        </div>
+      </div>
+      <div class="row mt-80">
+        <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3  col1">
+          <h2 class="align-center">CONTRACTOR</h2>
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4  col2">
+            <a href=""><img src="../../../assets/images/home/profiles.png" /></a>
+          </div>
+          <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+            <div class="head1"><a href="">Johnny Crown</a></div>
+            <div class="head2">Producer</div>
+            <div class="head3">Los Angles, LA</div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 pt-25 pl-6">
+          <div class="row">
+            <div class="col-sm-3">
+              &nbsp;
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              &nbsp;
+            </div>
+          </div>
+          <div class="text-center status-buttons">
+            <a href="javscript:void()" class="active">
+              <i class="is55">February 10th, 2018</i>
+              <span>&nbsp;</span> <i class="bold">Hire Accepted</i>
+            </a>
+            <a href="javscript:void()" class="active pCenter">
+              <i class="is55">February 10th, 2018</i>
+              <span>&nbsp;</span> <i class="bold">Payment Made</i>
+            </a>
+            <a href="javscript:void()" class="active pRight">
+              <i class="is55">February 10th, 2018</i>
+              <span>&nbsp;</span> <i class="bold">Payment Recieved</i>
+            </a>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              &nbsp;
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              &nbsp;
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 col1">
+          <h2 class="align-center">CONTRACTEE</h2>
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col2">
+            <a href=""> <img src="../../../assets/images/home/profiles.png" /></a>
+          </div>
+          <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+            <div class="head1"><a href="">Rosie Genrich</a></div>
+            <div class="head2">Camera Operator</div>
+            <div class="head3">Los Angles, LA</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <ng-container *ngTemplateOutlet="footer"></ng-container>
+
+  </header>
+</div>
+
+
+<!--End Header-->
+<div *ngIf="activePaymentOption || hasPayment" class="container">
+  <!--creditcardsList-->
+  <form>
+    <ng-container *ngFor="let model of allCreditCards;let j=index">
+      <fieldset>
+        <legend><span>Credit Card Info</span><span class="w200" *ngIf="model.defaultType"> <a class="credit blueBtn defaultAccoutnt"></a><p>Default Payment Method</p></span><span *ngIf="!model.defaultType"><span class="accInfo">#{{j+1}}</span><a id="{{model.id}}" (click)="makeDefaultCredit(model.id)" class="credit blueBtn"></a><a class="credit"><img id="{{model.id}}" (click)="deleteCreditCrd(model.id)" src="../../../assets/images/Deletebtn.png" /></a></span></legend>
+        <small>(You will be able to choose what payment method to use when making a purchase)</small>
+        <div class="row mTop-20">
+          <div class="col-lg-4">
+            <label for="cardName">Name On Card</label>
+            <input id="cardName" [value]="model.nameOnCard"   name="cardName" type="text" class="form-control" required maxlength="32" />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="cardNumber">Credit Card#</label>
+            <input number id="cardNumber" [value]="model?.creditCardNumber"  name="cardNumber"  type="number" class="form-control" required maxlength="32" />
+          </div>
+
+          <div class="col-lg-4">
+            <label for="accountName">Account Name</label>
+
+            <input id="accountName" [value]="model.accountName" type="text" class="form-control"  required maxlength="32" placeholder="e.g. JJs capital one credit card" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-8" *ngIf="j==0">
+                <label for="expDate">Expiration Date</label>
+                <p-calendar id="dates1"
+                            name="dates1"
+                            appendTo="body"
+                            readonlyInput="readonlyInput"
+                            [ngModel]="expireDate0"
+                            placeholder="Select...">
+                </p-calendar>
+              </div>
+              <div class="col-lg-8"  *ngIf="j==1">
+                <label for="expDate">Expiration Date</label>
+                <p-calendar id="dates2"
+                            name="dates2"
+                            appendTo="body"
+                            readonlyInput="readonlyInput"
+                            [ngModel]="expireDate1"
+                            placeholder="Select...">
+                </p-calendar>
+              </div>
+              <div class="col-lg-4">
+                <label for="secCode">Security Code</label>
+                <input id="secCode" [value]="model.securityCode"  type="text" class="form-control" required maxlength="32" />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-4">
+            <label for="billingState">Billing State</label>
+            <input id="billingState" [value]="model.billingState"  name="billingState" type="text" class="form-control" required maxlength="32" />
+
+          </div>
+
+          <div class="col-lg-3">
+            <label for="billingZip">Billing Zip</label>
+
+            <input id="billingZip"[value]="model.billingZip" name="billingZip" type="text" class="form-control" required maxlength="32" [pattern]="nameRegex" />
+          </div>
+        </div>
+
+      </fieldset>
+    </ng-container>
+  </form>
+
+  <!--BankAccountList-->
+  <form>
+    <ng-container *ngFor="let model of allBankAccouts; let i=index">
+      <fieldset>
+        <legend><span>Bank Account Info</span><span class="w200" *ngIf="model.defaultType"> <a class="credit blueBtn defaultAccoutnt"></a><p>Default Payment Method</p></span><span *ngIf="!model.defaultType"><span class="accInfo">#{{i+1}}</span><a id="{{model.id}}" (click)="makeDefaultAccount(model.id)" class="credit blueBtn" ></a><a class="credit"><img id="{{model.id}}"(click)="deleteBankAccount(model.id)" src="../../../assets/images/Deletebtn.png" /></a></span></legend>
+        <small>(You will be able to choose what payment method to use when making a purchase. This is also where you will receive money.)</small>
+        <div class="row mTop-20">
+          <div class="col-lg-4">
+            <label for="cardName">Routing#</label>
+            <input id="routing" [value]="model.routing" type="number" name="routing" class="form-control" required min="9" maxlength="9" />
+        
+          </div>
+
+          <div class="col-lg-4">
+            <label for="accountNumber">Account#</label>
+            <input id="accountNumber" [value]="model.accountNumber" type="number" name="accountNumber" class="form-control" required maxlength="32" />
+          </div>
+        
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <label for="accountName">Account Name</label>
+            <input id="accountName" [value]="model.accountName" name="accountName" type="text" class="form-control" required maxlength="32" placeholder="e.g. JJs bank account" />
+          </div>
+        </div>
+
+      </fieldset>
+      <div class="bottomContainer">
+      </div>
+    </ng-container>
+
+  </form>
+  <!----PersonalInformation-->
+ 
+  <div *ngIf="allCreditCards.length>0 || allBankAccouts.length>0">
+  <form>
+    <fieldset>
+      <legend>Personal Information</legend>
+      <small>(You will be able to choose what payment method to use when making a purchase)</small>
+      <div class="row mTop-20">
+        <div class="col-lg-4">
+          <legend class="personalSubLegend">Business Structure <small>(Entity that we use for 1099s)</small></legend>
+          <p-autoComplete id="corpStructure"
+                          name="corpStructure"
+                          placeholder="Corporate Structure"
+                          required="true"
+                          forceSelection="true"
+                          readonly="true"
+                          dropdown="true"
+                          [(ngModel)]="personalmodel.businessStructure"
+                          [suggestions]="allCorporateTypeSuggestions"
+                          (completeMethod)="onCorporateTypeKeyDown($event)"
+                          [multiple]="false">
+          </p-autoComplete>
+        </div>
+
+        <div class="col-lg-4">
+          <legend class="personalSubLegend">Social Security or EIN <small>(Entity that we use for 1099s)</small></legend>
+          <input id="cardNumber" (ngModelChange)="model.socialSecurityOrEIN=$event" name="cardNumber" [ngModel]="personalmodel.socialSecurityOrEIN" type="text" class="form-control" required maxlength="9" />
+          <!--<span *ngIf="EinInvalid" class="alert-danger">EIN should be of 9 digits</span>-->
+        </div>
+
+        <div class="col-lg-4">
+          <legend class="personalSubLegend">W9 <small>(info will be shared with employers if you choose)</small></legend>
+          <p-fileUpload name="uploadfile" #w9 chooseLabel="Choose PDF" mode="basic" [maxFileSize]="w9FileSize" (onBeforeSend)="onBeforeSend($event)"
+                        (onUpload)="onPdfUploaded($event)" [url]="w9Url" accept="application/pdf">
+          </p-fileUpload>
+          <p class="small help-block">
+            <span *ngIf="model.w9">&#10004; PDF attached.</span>
+          </p>
+
+        </div>
+      </div>
+    </fieldset>
+    <div *ngIf="!activePaymentOption">
+      <ng-container *ngTemplateOutlet="addPaymentOption"></ng-container>
+      <ng-container *ngTemplateOutlet="footer"></ng-container>
+    </div>
+  </form>
+    </div>
+</div>
+
+<!--start header-->
+
+
+
+<!--end header-->
+
+<div  [ngSwitch]="activePaymentOption">
+
+    <!--Credit Card-->
+    <ng-container *ngSwitchCase="'card'">
+        <form #f="ngForm" (ngSubmit)="saveCredit(f.form)" (keydown.enter)="$event.preventDefault()" novalidate>
+                <fieldset>
+                    <legend><span>Credit Card Info</span> <a class="credit blueBtn"></a></legend>
+                    <small>(You will be able to choose what payment method to use when making a purchase)</small>
+                    <div class="row mTop-20">
+                            <div class="col-lg-4">
+                                <label for="cardName">Name On Card</label>
+                                <input id="cardName" [ij-input-validation]="'Please enter a Name on Card.'" (ngModelChange)="model.nameOnCard=$event" [ngModel]="model.nameOnCard" name="cardName" type="text" class="form-control" required maxlength="32"/>
+                            </div>
+        
+                            <div class="col-lg-4">
+                                <label for="cardNumber">Credit Card#</label>
+                                <input number id="cardNumber" [ij-input-validation]="'Please enter a Credit Card Number.'"  [ngModel]="model?.creditCardNumber" name="cardNumber" (ngModelChange)="model.creditCardNumber=$event" type="number" class="form-control" required maxlength="32" />
+                            </div>
+                            
+                            <div class="col-lg-4">
+                                    <label for="accountName">Account Name</label>
+                         
+                                    <input id="accountName" [ij-input-validation]="'Please enter a Account Name.'" (ngModelChange)="model.accountName=$event"  [ngModel]="model.accountName" name="accountName" type="text" class="form-control" required maxlength="32" placeholder="e.g. JJs capital one credit card"  />
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-lg-4">
+                                <div class="row">
+                                  <div class="col-lg-8">
+                                    <label for="expDate">Expiration Date</label>
+                                    <p-calendar id="dates"
+                                                name="dates"                           
+                                                appendTo="body"                                               
+                                                readonlyInput="readonlyInput"
+                                                [(ngModel)]="model.expirationDate"
+                                                required="true"
+                                                [ij-input-validation]="'Please enter expire Date'"
+                                                placeholder="Select...">
+                                    </p-calendar>
+                                  </div>
+                                    <div class="col-lg-4">
+                                            <label for="secCode">Security Code</label>
+                                            <input id="secCode"   [ij-input-validation]="'Please enter Security Code'" (ngModelChange)="model.securityCode=$event"    [ngModel]="model.securityCode" name="secCode" type="text" class="form-control" required maxlength="32"/>
+                                    </div>
+                                </div>
+                             
+                            </div>
+        
+                            <div class="col-lg-4">
+                                <label for="billingState">Billing State</label>
+                                 <input id="billingState"  [ij-input-validation]="'Please enter Billing State'" (ngModelChange)="model.billingState=$event" name="billingState"  [ngModel]="model.billingState" type="text" class="form-control" required maxlength="32" /> 
+                               
+                            </div>
+                            
+                            <div class="col-lg-3">
+                                    <label for="billingZip">Billing Zip</label>
+                         
+                                    <input id="billingZip" (ngModelChange)="model.billingZip=$event"  [ij-input-validation]="'Please enter billing zip code'" name="billingZip" type="text" [ngModel]="model.billingZip" class="form-control" required maxlength="32" [pattern]="nameRegex"  />
+                            </div>
+                    </div>
+       
+                </fieldset>
+                <div class="bottomContainer">
+                  <div *ngIf="!hasPayment">
+                    <ng-container *ngTemplateOutlet="personalInformation"></ng-container>
+                  </div>
+                  <ng-container *ngTemplateOutlet="addPaymentOption"></ng-container>
+                  <ng-container *ngTemplateOutlet="footer"></ng-container>
+                </div>
+            </form>
+    </ng-container>
+
+    <!--Bank Account-->
+   <ng-container *ngSwitchCase="'bank'">
+        <form #f="ngForm" (ngSubmit)="saveBankAccount(f.form)" (keydown.enter)="$event.preventDefault()" novalidate>
+                <fieldset>
+                    <legend><span>Bank Account Info</span><span *ngIf="!hasPayment" class="w200"> <a class="blueBtn"></a><p>Default Payment Method</p></span></legend>
+                    <small>(You will be able to choose what payment method to use when making a purchase. This is also where you will receive money.)</small>
+                    <div class="row mTop-20">
+                            <div class="col-lg-4">
+                                <label for="cardName">Routing#</label>
+                                <input id="routing" type="number"  #routing="ngModel" name="routing" (ngModelChange)="model.routing=$event" [ngModel]="model.routing"  class="form-control" [ij-input-validation]="'Please enter Rounting Number'" required min="9" maxlength="9"/>
+                                <span class="textColor"  *ngIf="routingInValid">Routing number should be of 9 digits.</span>
+                            </div>
+        
+                            <div class="col-lg-4">
+                                <label for="accountNumber">Account#</label>
+                                <input id="accountNumber" type="number"   name="accountNumber" (ngModelChange)="model.accountNumber=$event" [ngModel]="model.accountNumber"  class="form-control" [ij-input-validation]="'Please enter Acccount Number'" required maxlength="32" />
+                                <span class="textColor" *ngIf="accountNoInvalid">Account number should be 8 digits</span>
+                            </div>   
+                            <div class="col-lg-4">
+                                    <label for="conAccNumber">Confirm Account#</label>
+                                    <input id="conAccNumber" type="number" name="conAccNumber" (ngModelChange)="model.conAccountNumber=$event" [ngModel]="model.conAccountNumber"  class="form-control" [ij-input-validation]="'Please enter confirm Account Number'" required maxlength="32"   />
+                              <span class="textColor" *ngIf="confirmAccountInvalid">Account number does not match</span>
+                                </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label for="accountName">Account Name</label>
+                        <input id="accountName" name="accountName" (ngModelChange)="model.accountName=$event" [ngModel]="model.accountName" type="text" class="form-control" [ij-input-validation]="'Please enter Account Name'" required maxlength="32" placeholder="e.g. JJs bank account" />
+                      </div>
+                    </div>
+               
+                </fieldset>
+                <div class="bottomContainer">
+                  <div *ngIf="!hasPayment">
+                    <ng-container *ngTemplateOutlet="personalInformation"></ng-container>
+                  </div>
+                <ng-container *ngTemplateOutlet="addPaymentOption"></ng-container>
+                <ng-container *ngTemplateOutlet="footer"></ng-container>
+                </div>
+            </form>
+    </ng-container>
+
+</div>
+
+
+
+<!--Personal Information-->
+<ng-template #personalInformation>
+    <fieldset>
+            <legend>Personal Information</legend>
+            <small>(You will be able to choose what payment method to use when making a purchase)</small>
+            <div class="row mTop-20">
+              <div class="col-lg-4">
+                <legend class="personalSubLegend">Business Structure <small>(Entity that we use for 1099s)</small></legend>
+                <p-autoComplete id="corpStructure"
+                                [class.validationData]="businessStructureInvalid"
+                                name="corpStructure"
+                                placeholder="Corporate Structure"
+                                [required]="requiredPersonl"
+                                forceSelection="true"
+                                readonly="true"
+                                dropdown="true"
+                                [(ngModel)]="model.businessStructure"
+                                [suggestions]="allCorporateTypeSuggestions"                               
+                                (completeMethod)="onCorporateTypeKeyDown($event)"
+                                [multiple]="false">
+                               
+                </p-autoComplete>
+              </div>
+
+                    <div class="col-lg-4">
+                        <legend class="personalSubLegend">Social Security or EIN <small>(Entity that we use for 1099s)</small></legend>
+                        <input id="cardNumber" (ngModelChange)="model.socialSecurityOrEIN=$event" [class.validationData]="EinInvalid"  name="cardNumber" [ngModel]="model.socialSecurityOrEIN" type="text" class="form-control"     [required]="requiredPersonl" maxlength="9" />
+                      <span *ngIf="EinInvalid" class="textColor">EIN should be of 9 digits</span>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                            <legend class="personalSubLegend">W9 <small>(info will be shared with employers if you choose)</small></legend>
+                            <p-fileUpload name="uploadfile" #w9 chooseLabel="Choose PDF" mode="basic" [maxFileSize]="w9FileSize" (onBeforeSend)="onBeforeSend($event)"
+                            (onUpload)="onPdfUploaded($event)" [url]="w9Url" accept="application/pdf">
+                        </p-fileUpload>
+                        <p class="small help-block">
+                            <span *ngIf="model.w9">&#10004; PDF attached.</span>
+                        </p>
+                          
+                    </div>
+            </div>
+    </fieldset>
+
+</ng-template>
+
+<!-- Payment Option (Add)-->
+<ng-template #addPaymentOption>
+    <div class="paymentOptionsContainer">
+          <div class="ij-dropdown btn-group">
+               <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="add-payment" data-test-id="op-project-new"><span>+</span></button>
+                   <ul class="pointer dropdown-menu dropdown-menu-right">
+                     <li>
+                        <a (click)="selectOption('bank')">Bank Account</a>
+                      
+                     </li>
+                     <li>
+                        <a (click)="selectOption('card')">Credit Card</a>
+                     </li>
+                   </ul>
+            </div>
+            <span>Click to add bank account or credit card.</span>
+        </div>
+    
+</ng-template>
+
+<ng-template #footer>
+  <footer class="footer">
+    <div class="saveReset" *ngIf="activePaymentOption">
+      <input type="button" value="Cancel" (click)="cancelPayment()" />
+      <input type="submit" value="Save" />
+    </div>
+    <div class="policy">
+      <a>Late Fees</a> <span>/</span> <a>Cancelation Policy</a> <span>/</span> <a>Payment Policy</a>
+    </div>
+
+    <div *ngIf="message" class="alert alert-danger">{{message}}</div>
+    <div *ngIf="success" class="alert alert-danger">{{message}}</div>
+    <div class="alert alert-danger" *ngIf="showSaveErrored">
+      <div *ngIf="errors.length > 0 then errorList else errorGeneric"></div>
+
+      <ng-template #errorList>
+        <ul>
+          <li *ngFor="let error of errors">{{error}}</li>
+        </ul>
+      </ng-template>
+
+      <ng-template #errorGeneric>
+        <li *ngFor="let error of errors">{{error}}</li>
+      </ng-template>
+    </div>
+  </footer>
+</ng-template>
+

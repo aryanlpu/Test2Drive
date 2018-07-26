@@ -1,0 +1,119 @@
+<ng-container *ngIf="dialogVisible">
+  <p-dialog modal="true" width="auto" ngClass="custom-dialog" [resizable]="false" [closable]="false" [(visible)]="dialogVisible">
+    <p-header ngClsass="popup-header">
+      <h2>Cancellation Policy</h2>
+      <span class="ij icon x-icon" (click)="hideDialog()"></span>
+    </p-header>
+    <article class="dialog-container">
+      <div class="alert alert-danger" *ngIf="showGetErrored">
+        We experienced a problem. Please close this dialog and try again.
+      </div>
+      <!-- <ij-save-indicator message="Your project has been added." [visible]="showSaveCompleted"></ij-save-indicator> -->
+      <form ij-form-validation #f="ngForm" (ngSubmit)="onSubmit(f)" (keydown.enter)="$event.preventDefault()" novalidate>
+        <div class="dialog-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12 form-group">
+                <div class="col-sm-3">
+                  <span class="">
+                    <img class="titleimg" src="https://ijdevstorage.blob.core.windows.net/images/d29c2dfa-8230-4b4d-8be4-467211d4db6a.jpg" alt="Charn Sharma">
+                  </span>
+                </div>
+                <div class="col-sm-8 projecttitle">
+                  <label>"A Teacer's Obsession | Feature Film"</label>
+                </div>
+                <div class="col-sm-1">&nbsp;</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 form-group">
+                <label class="parheadcolor">7 Days</label>
+                <p>Cancel within 7 days of shoot will result in the loss of three industry score points for your profile.
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 form-group">
+                <label class="parheadcolor">48 Hours</label>
+                <p>Cancel within 48 Hours of shoot will result in one strike on the user account. At three strikes, the user
+                  is kicked off the Industry Jump for a year.
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 form-group">
+                <label for="songTitle">Why Are You Canceling ?</label>
+              </div>
+              <div class="col-sm-12 form-group">
+                <div class="col-sm-1 form-group">
+                  <label class="chk">
+                    <input type="checkbox" />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div class="col-sm-9 form-group">
+                  <label>I am not available anymore.</label>
+                </div>
+                <div class="col-sm-2 form-group">&nbsp;</div>
+              </div>
+              <div class="col-sm-12 form-group">
+                <div class="col-sm-1 form-group ">
+                  <label class="chk">
+                    <input type="checkbox" />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div class="col-sm-9 form-group">
+                  <label>I don't want to work with this client.</label>
+                </div>
+                <div class="col-sm-2 form-group">&nbsp;</div>
+              </div>
+              <div class="col-sm-12 form-group">
+                <div class="col-sm-1 form-group">
+                  <label class="chk">
+                    <input type="checkbox" />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div class="col-sm-9 form-group">
+                  <label>I misunderstood the job terms.</label>
+                </div>
+                <div class="col-sm-2 form-group">&nbsp;</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 form-group">
+                <textarea id="message" name="message" placeholder="Please explain why you are canceling this project. This response will be sent to all parties involved in this transaction"
+                  class="form-control" rows="7" required minlength="5" maxlength="512"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer>
+          <div class="row">
+            <div class="col-sm-12 form-group">
+              <label>By pressing cancel, you agree to the cancelation penality and will be penalized
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2 form-group">&nbsp;</div>
+            <div class="col-sm-4 form-group">
+              <input class="cancelbtn" type="button" value="Cancel" />
+            </div>
+            <div class="col-sm-4 form-group">
+              <input type="submit" value="Mutual Cancelation" />
+            </div>
+            <div class="col-sm-2 form-group">&nbsp;</div>
+          </div>
+          <!-- <div class="mar-20 alert alert-danger" *ngIf="showSaveErrored">
+            <ul>
+              <li *ngFor="let error of errors">{{error}}</li>
+            </ul>
+          </div> -->
+        </footer>
+      </form>
+
+    </article>
+  </p-dialog>
+</ng-container>

@@ -1,0 +1,23 @@
+@spacing: 30px;
+
+#members {
+    .card {
+        display: inline-block;
+        margin-right: @spacing;
+    }
+}
+
+@media (max-width: 1000px) {
+    #members {
+        .card {
+            display: block;
+
+            &:last-of-type {
+                margin: 0 auto;
+            }
+            &:not(:last-of-type) {
+                margin: 0 auto @spacing;
+            }
+        }
+    }
+}

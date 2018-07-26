@@ -1,0 +1,34 @@
+<ng-container *ngIf="dialogVisible">
+        <p-dialog modal="true" modal="modal" width="auto" ngClass="custom-dialog" [resizable]="false" [closable]="false" [(visible)]="dialogVisible">
+            <p-header ngClsass="popup-header">
+                <h2>INDUSTRY LATE FEES</h2>
+                <span class="ij icon x-icon" (click)="dialogVisible=false"></span>
+            </p-header>
+            <article class="dialog-container">
+                    <div class="dialog-body">
+                            <div class="row">
+
+                                    <div class="col-sm-12 col-md-10 col-md-offset-1">
+                                        <p class="time">
+                                            EVERY 24 HOURS PAST DUE
+                                        </p>
+                                        <p class="policy-content">
+                                            $50 is added to the payment for each day the payment is late.
+                                        </p>
+                                       <p class="time">
+                                        AFTER 10 DAYS
+                                       </p>
+                                       <p class="policy-content">
+                                        A report is filed to the labor board on behalf of the contractee and 
+                                        contractor will be further liable for all damages.
+                                       </p>
+                                </div>
+                        </div>
+                        </div>
+            </article>
+            <p-footer>
+                    <input type="submit" (click)="onAccept()" class="btn accept" value="Accept" />
+                    <input type="submit" (click)="onDeny()" class="btn deny" value="Deny" />
+                </p-footer>
+        </p-dialog>
+    </ng-container>

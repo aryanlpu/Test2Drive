@@ -1,0 +1,701 @@
+@import '../../../profile/styles/common.less';
+@import '../../../profile/overview/styles/common.less';
+
+@gray: #555555;
+@blue: #1283D7;
+@orange: #FF930D;
+@orange-darker: #ea880d;
+@error-color: #a94442;
+@input-ver-padding: 9px;
+@fieldset-spacing: 50px;
+@input-height: 40px;
+@input-padding: 6px 12px;
+@info-padding: 5px;
+
+
+
+
+.validationData {
+  border-color: #F27601 !important;
+}
+
+.textColor {
+  color: #F27601 !important;
+}
+
+.top {
+  height: 1000px;
+  background-color: white;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+legend {
+  margin-bottom: 6px !important;
+
+  span {
+    float: left;
+  }
+
+  p {
+    font-size: 13px;
+    color: #555555;
+    margin-top: 7px;
+  }
+}
+
+legend.personalSubLegend {
+  margin-bottom: 20px !important;
+  font-size: 14px !important;
+  color: #555555 !important;
+  font-weight: 700 !important;
+}
+
+.mTop-20 {
+  margin-top: 20px;
+}
+
+button#upload {
+  top: 6px;
+}
+
+.add-payment {
+  .new-button();
+  height: 26px !important;
+  width: 26px !important;
+}
+
+#payment-header {
+  padding: 50px;
+  text-align: center;
+
+  h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: @orange-darker;
+    padding-bottom: 50px;
+  }
+
+  span {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px;
+  }
+
+  .ij-dropdown {
+    .dropdown-menu-right {
+      left: 15px;
+    }
+  }
+
+  .policy {
+    padding: 40px;
+
+    a {
+      font-size: 15px;
+      color: #4A90E2;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    span {
+      font-size: 15px;
+      font-weight: 700;
+    }
+  }
+}
+
+.defaultAccoutnt {
+  opacity: 1 !important;
+}
+
+.w200 {
+  width: 200px
+}
+
+.accInfo {
+  float: left;
+  margin: 0 0 0 10px
+}
+
+form {
+  margin-top: 35px;
+
+  .validation-summary {
+    color: @error-color;
+    margin-top: 5px;
+  }
+
+  .help-block.small {
+    font-size: .9em;
+  }
+
+  button.submit,
+  input[type="submit"] {
+    .input-btn();
+    background: @orange;
+    color: #fff;
+    border: none;
+
+    &:hover {
+      background: @orange-darker;
+    }
+  }
+
+  input[type="button"] {
+    .input-btn();
+    background: #fff;
+    color: #555555;
+    // border: none;
+    border: 2px solid #efeded;
+    margin-right: 10px;
+
+    &:hover {
+      background: #efeded;
+    }
+  }
+
+  .on-tablet( {
+    [class*="col-"] {
+      margin-bottom: 15px;
+    }
+  }
+
+  );
+
+  .form-control:not(textarea) {
+    padding: @input-padding;
+    height: @input-height;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  small {
+    .font-regular();
+    color: @gray;
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  fieldset {
+    margin-bottom: @fieldset-spacing;
+
+    legend {
+      .font-bold();
+      color: @blue;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      font-size: 20px;
+      letter-spacing: 0;
+
+      small {
+        margin-left: @info-padding;
+      }
+    }
+
+    & > .row + .row {
+      margin-top: 20px;
+    }
+  }
+
+  label {
+    color: @gray;
+    margin-bottom: 8px;
+    display: block;
+
+    small {
+      margin-left: @info-padding;
+    }
+  }
+
+  & > footer {
+    margin-bottom: 80px;
+
+    input[type="reset"] {
+      .input-btn();
+      background: #fff;
+      border: 1px solid #D3D3D3;
+      margin-left: 20px;
+
+      &:hover {
+        background: #f9f9f9;
+      }
+    }
+
+    .alert {
+      margin-top: @fieldset-spacing;
+    }
+  }
+
+  .upload {
+    small {
+      margin: @info-padding 0 0;
+      display: block;
+    }
+  }
+
+  .paymentOptionsContainer {
+    text-align: center;
+    padding: 40px;
+    z-index: 0;
+
+    span {
+      font-size: 14px;
+      font-weight: 700;
+      padding: 5px;
+    }
+
+
+
+
+
+    .ij-dropdown {
+      .dropdown-menu-right {
+        left: 15px;
+      }
+    }
+  }
+
+  .footer {
+    text-align: center;
+    padding-bottom: 40px;
+  }
+
+  .policy {
+    padding: 40px;
+
+    a {
+      font-size: 15px;
+      color: #4A90E2;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    span {
+      font-size: 15px;
+      font-weight: 700;
+    }
+  }
+
+  .blueBtn {
+    width: 22px;
+    background-color: #4392EF;
+    height: 22px;
+    border: none;
+    float: left;
+    background-size: 17px;
+    margin-right: 8px;
+    border-radius: 100%;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-left: 10px;
+  }
+
+  .blueBtn:before {
+    content: "\f00c";
+    color: #fff;
+    top: 4px;
+    position: relative;
+    left: 4px;
+    font-size: 14px;
+  }
+
+  .BtnRemove {
+    width: 22px;
+    background-color: #fe3824;
+    height: 22px;
+    border: none;
+    float: left;
+    background-size: 17px;
+    margin-right: 8px;
+    border-radius: 100%;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-left: 10px;
+    text-align: center;
+    position: relative
+  }
+
+  .BtnRemove:before {
+    content: " ";
+    border-bottom: #fff solid 2px;
+    color: #fff;
+    top: 7px;
+    position: relative;
+    left: 5px;
+    font-size: 14px;
+    position: absolute;
+    width: 12px;
+    height: 5px;
+    z-index: 999;
+  }
+
+  .blueBtn.credit {
+    opacity: 0.3;
+  }
+
+  .credit {
+    cursor: pointer;
+  }
+}
+
+#payment-header {
+
+  .paymentStatus {
+    margin: 60px 0px 15px;
+  }
+
+  .paymentStatus .centered {
+    text-align: center;
+  }
+
+  .paymentStatus .centered span.greenhead {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14.14px;
+    color: #74D144;
+    letter-spacing: 0;
+    text-transform: uppercase
+  }
+
+  .paymentStatus .col1 img {
+    height: 102px;
+  }
+
+  .paymentStatus .col2 img {
+    height: 79px;
+    width: 79px;
+  }
+
+  .paymentStatus .col1 a {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    color: #4A90E2;
+    letter-spacing: 0.35px;
+  }
+
+  .paymentStatus .col1 a:hover {
+    text-decoration: none;
+  }
+
+  .paymentStatus .col1 h2 {
+    font-size: 20px;
+    color: #FF8410;
+    letter-spacing: 0px;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 900;
+    line-height: 24px;
+    padding: 0 15px 15px;
+    margin: 0;
+    text-align: left
+  }
+
+  .paymentStatus .col1 .head1, .paymentStatus .col1 .head2, .paymentStatus .col1 .head3 {
+    text-align: left;
+    padding-left: 15px
+  }
+
+  .paymentStatus .col1 .head1 a {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    color: #4A90E2;
+    letter-spacing: -0.5px;
+  }
+
+  .paymentStatus .col1 .head2 {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14.14px;
+    color: #484848;
+    letter-spacing: 0;
+  }
+
+  .paymentStatus .col1 .head3 {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10.61px;
+    color: #484848;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  @media (max-width:767px) {
+    .messageBtn, .expenseBtn, .reportBtn, .downloadBtn {
+      margin: 5px 0 !important
+    }
+
+    .paymentStatus .col1 .head1, .paymentStatus .col1 .head2, .paymentStatus .col1 .head3 {
+      text-align: center;
+      padding-left: 0px;
+    }
+
+    .align-center {
+      text-align: center !important;
+    }
+
+    .pl-6 {
+      padding-left: 16% !important;
+    }
+  }
+
+  @media (max-width:520px) {
+    .status-buttons i {
+      font-size: 6.14px !important;
+    }
+  }
+
+  .paymentStatus .gap {
+    margin: 150px 0px 0px 10px;
+  }
+
+  .paymentStatus .centered a.cancellink {
+    font-family: Lato;
+    font-size: 14px;
+    color: #4A90E2;
+    letter-spacing: 0.35px;
+    cursor: pointer;
+  }
+
+  .paymentStatus .centered a.cancellink {
+    font-family: Lato;
+    font-size: 14px;
+    color: #4A90E2;
+    letter-spacing: 0.35px;
+  }
+
+  .paymentStatus .centered a:hover.cancellink {
+    text-decoration: none;
+  }
+
+  .paymentStatus .greentransparentbar {
+    opacity: 0.19;
+    border: 5px solid #70CF3F;
+  }
+
+  .paymentStatus .greenbar {
+    border: 5px solid #70CF3F;
+  }
+
+
+
+  .status-buttons a {
+    position: relative;
+    display: inline-block;
+  }
+
+  .status-buttons a.deactive::after {
+    content: "";
+    position: absolute;
+    opacity: 0.19;
+    border: 4px solid #70CF3F;
+    width: 100%;
+    z-index: -1;
+    top: 10%;
+    left: 0%;
+  }
+
+  .status-buttons a.active::after {
+    content: "";
+    position: absolute;
+    border: 4px solid #70CF3F;
+    width: 100%;
+    z-index: -1;
+    top: 10%;
+    left: 0%;
+  }
+
+
+  @media (max-width:585px) {
+    // .status-buttons a.deactive::after {min-width: 90% !important;}
+    // .status-buttons a.active::after {min-width: 90% !important;}
+    .status-buttons a {
+      min-width: 31% !important;
+      word-break: break-all;
+    }
+
+    .pl-6 {
+      padding-left: 12% !important;
+    }
+  }
+
+
+  .status-buttons a {
+    display: inline-block;
+    font-family: Lato;
+    font-size: 14.14px;
+    color: #484848;
+    letter-spacing: 0;
+    font-weight: normal;
+    margin-right: 0;
+    text-align: left;
+    min-width: 28%;
+    text-decoration: none;
+    line-height: 75px;
+    float: left;
+    position: relative
+  }
+
+  .pl-6 {
+    padding-left: 6%
+  }
+
+
+  .status-buttons a:hover {
+    text-decoration: none;
+  }
+
+  .status-buttons a.active span {
+    color: white;
+    background: #70CF3F;
+    height: 20px;
+    width: 10px;
+    left: 0%;
+    position: absolute;
+    top: 0px
+  }
+
+  .ml-43 {
+    margin-left: 43px !important
+  }
+
+  .ml-135 {
+    margin-left: 135px !important
+  }
+
+  .mt-15 {
+    padding: 15px 0 5px;
+  }
+
+  .mt-40 {
+    margin-top: 40px
+  }
+
+  .mt-40 {
+    margin-top: 40px
+  }
+
+  .mt-40 {
+    margin-top: 40px
+  }
+
+  .mt-80 {
+    margin-top: 80px
+  }
+
+  .pt-25 {
+    padding-top: 25px
+  }
+
+  .status-buttons i {
+    font-family: Lato;
+    font-size: 12.14px;
+    color: #484848;
+    letter-spacing: 0;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal
+  }
+
+  .status-buttons i.bold {
+    font-weight: bold;
+  }
+
+  .status-buttons span {
+    color: white;
+    background: #70CF3F;
+    display: block;
+    height: 0px;
+    margin: 0 auto 10px;
+    padding-top: 20px;
+    width: 0px;
+    position: absolute;
+    top: 0px
+  }
+
+  .is55 {
+    position: absolute;
+    top: -55px;
+    font-style: normal;
+    white-space: nowrap;
+    left: 0%
+  }
+
+  .mt-20 {
+    margin-top: 20px;
+  }
+
+  .status-buttons a.active.pCenter {
+    text-align: center
+  }
+
+  .status-buttons a.active.pCenter .is55 {
+    left: 0;
+    right: 0
+  }
+
+  .status-buttons a.active.pCenter span {
+    left: 0;
+    right: 0
+  }
+
+  .status-buttons a.active.pRight {
+    text-align: right
+  }
+
+  .status-buttons a.active.pRight span {
+    left: auto;
+    right: 0
+  }
+
+  .status-buttons a.active.pRight .is55 {
+    right: 0;
+  }
+  //Fretures
+  span.feature {
+    font-family: Lato;
+    font-weight: bold;
+    font-size: 14px;
+    color: #4A4A4A;
+    letter-spacing: 0.35px;
+    margin-bottom: 10px;
+    line-height: 24px;
+  }
+
+  span.checkmark {
+    color: #4A90E2;
+    padding: 0px 5px;
+  }
+}
+
+@media screen and (max-width:480px) {
+  .custom-dialog ::ng-deep .ui-dialog {
+    min-width: 95% !important;
+
+    .ui-dialog-titlebar {
+      h2 {
+        margin-top: 35px
+      }
+    }
+  }
+}

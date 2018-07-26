@@ -1,0 +1,176 @@
+<section id="fields" class="form-widget">
+    <form #f="ngForm" (ngSubmit)="onNextStep(f.form)" novalidate autocomplete="off">
+    <div class="group" [ngClass]="{invalid: this.submitted && companyName.invalid }">
+        <span class="ij icon user-white"></span>
+        <input
+            [ij-focus]="true"
+            type="text" 
+            #companyName="ngModel" 
+            [(ngModel)]="model.companyName" 
+            name="companyName" 
+            placeholder="Company Name *" 
+            required
+            maxlength="64" />
+    </div>
+    <div class="group" [ngClass]="{invalid: this.submitted && email.invalid}">
+        <span class="ij icon email-white"></span>
+        <input 
+            type="email" 
+            #email="ngModel"
+            [(ngModel)]="model.companyEmail" 
+            name="email" 
+            placeholder="Company Email *" 
+            required 
+            email
+            maxlength="64" />
+        
+        <div class="validation-summary text-left" *ngIf="submitted && email.errors?.email && !email.errors.required">
+            <span>Please enter a valid email address.</span>
+        </div>
+    </div>
+        
+    <div class="group" [ngClass]="{invalid: this.submitted && phone.invalid}">
+            <span class="ij icon phone-white"></span>
+            <input 
+                type="tel"
+                #phone="ngModel" 
+                [(ngModel)]="model.phone" 
+                name="phone" 
+                placeholder="(999) 999-9999 *" 
+                required
+                [pattern]="phoneRegex"
+                [textMask]="{mask: phoneMask}" />
+                
+            <div class="validation-summary text-left" *ngIf="submitted && phone.errors?.pattern && !phone.errors.required">
+                <span>Please enter a phone number.</span>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="group" [ngClass]="{invalid: submitted && model.companyPic == ''}">
+                <button type="button" class="btn-transparent" (click)="onProfilePicClicked($event)">
+                    <span class="ij icon avatar-white"></span>
+                    <span>Profile Picture</span>
+                </button>
+                <div class="coach-marks">
+                    <span *ngIf="!model.companyPic">Click to upload.</span>
+                    <span *ngIf="model.companyPic">&#10004; Picture selected.</span>
+                </div>
+            </div>
+        </div>
+
+        <fieldset
+            #address="ijAddress"
+            ngModelGroup="address" 
+            ij-address
+            [ij-city]="city"
+            [ij-state]="state"
+            [ij-zipcode]="zipcode">
+            
+        <!-- city -->
+        <div class="group" [ngClass]="{invalid: submitted && (city.invalid || address.invalid)}">
+            <span class="ij icon pindrop-white"></span>
+            <input 
+                name="city" 
+                #city="ngModel" 
+                type="text"
+                [ngModel]="model.city | titlecase"
+                (ngModelChange)="model.city=$event"
+                placeholder="City *" 
+                required
+                minlength="2"
+                maxlength="128" />
+        </div>
+
+        <!-- state & zip -->
+        <div class="inline-group">
+            <div class="group" [ngClass]="{invalid: submitted && (state.invalid || address.invalid)}">
+                <span class="ij icon pindrop-white"></span>
+                <select required name="state" name="state" #state="ngModel" [(ngModel)]="model.state" >
+                    <option 
+                        *ngFor="let s of states"
+                        [disabled]="s.abbreviation == ''"
+                        [ngValue]="s.abbreviation">{{s.name}}</option>
+                </select>
+   
+               
+            </div>
+            <!-- <div class="group" [ngClass]="{invalid: submitted && (zipcode.invalid || address.invalid)}">
+                <input 
+                    name="zipcode" 
+                    #zipcode="ngModel"
+                    type="text"
+                    [(ngModel)]="model.zipcode" 
+                    placeholder="Zip Code *" 
+                    required
+                    [pattern]="zipcodeRegex"
+                    [textMask]="{mask: zipcodeMask}" />
+            </div> -->
+            <div class="group" [ngClass]="{invalid: submitted && (zipcode.invalid || address.invalid)}">
+                    <input 
+                        name="zipcode" 
+                        #zipcode="ngModel"
+                        type="text"
+                        required
+                        [(ngModel)]="model.zipcode" 
+                        placeholder="Zip Code *" 
+                        [pattern]="zipcodeRegex"
+                        [textMask]="{mask: zipcodeMask}" />
+                </div>
+            <div class="validation-summary text-left" *ngIf="submitted && address.invalid">
+                Please enter a valid address.
+            </div>
+        </div>
+    </fieldset>
+    
+
+    <div class="group" [ngClass]="{invalid: this.submitted && password.invalid}">
+        <span class="ij icon password-white"></span>
+        <input 
+            type="password" 
+            #password="ngModel" 
+            [(ngModel)]="model.password" 
+            name="password" 
+            placeholder="Password *" 
+            required
+            [pattern]="passwordRegex"
+            minlength="6" 
+            maxlength="100" />
+        <div class="coach-marks">
+            <ul>
+                <li>Minimum 6 characters.</li>
+                <li>Must contain upper and lowercase characters.</li>
+                <li>Requires a number; special character optional.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="group" [ngClass]="{invalid: this.submitted && confirmPassword.invalid}">
+        <span class="ij icon password-white"></span>
+        <input 
+            type="password" 
+            #confirmPassword="ngModel" 
+            [(ngModel)]="model.confirmPassword" 
+            name="confirmPassword" 
+            placeholder="Re-type Password *" 
+            required
+            [pattern]="passwordRegex"
+            minlength="6" 
+            maxlength="100"
+            [equalTo]="password" />
+
+        <div class="validation-summary text-left" *ngIf="submitted && confirmPassword.errors?.equalTo">
+            <span>The passwords do not match.</span>
+        </div>
+    </div>
+    <!-- <p class="required-desc">
+        * Denotes a required field.
+    </p> -->
+    <p class="group required-desc">If you are a filmmaker that resides outside of the USA,  <a routerLink="/signup/request">click here.</a></p>
+
+    <footer class="group">
+        <input type="button" (click)="onCancel()" class="secondary" value="<< Back" />
+        <input type="submit" class="primary" value="Next >>" />
+    </footer>
+    </form>
+    <ij-profilepic-dialog (onSaved)="onProfilePicSaved($event)"></ij-profilepic-dialog>
+</section>

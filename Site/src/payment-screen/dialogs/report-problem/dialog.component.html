@@ -1,0 +1,72 @@
+<ng-container *ngIf="dialogVisible">
+            <p-dialog modal="true" modal="modal" width="auto" ngClass="custom-dialog" [resizable]="false" [closable]="false" [(visible)]="dialogVisible">
+                <p-header ngClsass="popup-header">
+                    <h2>REPORT PROBLEM</h2>
+                    <span class="ij icon x-icon" (click)="dialogVisible=false"></span>
+                </p-header>
+                <article class="dialog-container">
+                    <form >
+                <header *ngIf="model.header">
+                    <ij-dialog-header [model] = "model.header"></ij-dialog-header>
+                </header>
+                        <div class="dialog-body">
+                                        <div class="row">
+                                                <div class="col-md-12">            
+                                                <p>What's the Problem ?</p>
+<!--
+                                                <div class="row"> 
+                                                        <div class="col-sm-12 imgFitRadioOpt"> <span class="cancel imgFitR">
+                                                            <input type="radio" name="lateFeePolicy" id="lateFeePolicy"  /> 
+                                                            <span class="checkmarkRadioOtp"></span>
+                                                        </span><a  (click)="onLatePolicy()">You must read and accept Industry Jumps late fees policy </a></div>				 
+                                                    </div>-->
+
+
+                                                <div class="relOpt">
+                                                        <span class="imgFitR">
+                                                             
+                                                                <input type="radio" name="rbContractor" > 
+                                                                <span class="checkmarkRadioOtp"></span>
+                                                            </span>
+                                                    <span> Contractor is  violating my rights</span></div><br>
+                                                    <div class="relOpt">
+                                                            <span class="imgFitR">
+                                                                 
+                                                                    <input type="radio" name="rbContractor" > 
+                                                                    <span class="checkmarkRadioOtp"></span>
+                                                                </span>
+                                                        <span> Contractor won't accept  my overtime</span></div><br>
+                                                        <div class="relOpt">
+                                                                <span class="imgFitR">
+                                                                     
+                                                                        <input type="radio" name="rbContractor" > 
+                                                                        <span class="checkmarkRadioOtp"></span>
+                                                                    </span>
+                                                            <span> Other</span></div><br>
+
+
+
+                                                <br> <div>
+                                                <textarea 
+                                                id = "message" 
+                                                name = "message" 
+                                                class = "form-control" 
+                                                rows = "5" 
+                                                maxlength = "52" 
+                                                ></textarea>
+                                                    </div>
+                                                    <div>
+                                                    By clicking report, your message will be sent to one of our admins. We will then contact you to discuss the situation further, responses usually  take 24-48 hours.
+                                
+                                                    </div>
+                            </div>
+                            </div>
+                            </div>
+                            <p-footer>
+                                    <input type="submit" (click)="onReport()" class="btn report" value="Report" />
+                            </p-footer>
+                        </form>
+                </article>
+            
+            </p-dialog>
+        </ng-container>

@@ -1,0 +1,139 @@
+
+<ij-site-header mode="full" title="Elevate Your Film Career"></ij-site-header>
+
+<section class="info" id="how-it-works">
+
+ 
+  <h2 class="h2-before-pills">How it Works</h2>
+  <div class="pills-div">
+    <a [class.active]="filmCrewActive" class="btn" (click)="onTab('filmCrew')">Film Crew</a>
+    <a [class.active]="producerActive" class="btn btn-Success" (click)="onTab('producers')">Producers</a>
+  </div>
+  
+  <div class="container" [ngSwitch]="activeTab" >
+     <!-- First Tab -->
+      <ng-container *ngSwitchCase="'producers'">
+          <div class="row">
+              <div class="col-sm-6 text-right">
+                <img class="img-responsive" src="../assets/images/home/img-howitworks.png" alt="How it Works" />
+              </div>
+              <div class="col-sm-6">
+        
+                <ul class="steps">
+                  <li>
+                    <h3>1. Search for Filmmakers</h3>
+                    <p>
+                      User our advance search engine to find filmmakers that is within your search parameters
+                    </p>
+                  </li>
+                  <li>
+                    <h3>2. View Vetted Candidates</h3>
+                    <p>
+                      Look through dozen of options, read their reviews, view their experience, 
+                      and pick the one that is best for you.
+                  </li>
+                  <li>
+                    <h3>3. Hire Your Crew!</h3>
+                    <p>
+                       Easily book film crew and automatically recieve their employeement 
+                       information so you can hit the ground rolling.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+         </ng-container>
+    <!-- Second Tab -->
+    <ng-container *ngSwitchCase="'filmCrew'">
+
+        <div class="row">
+            <div class="col-sm-6 text-right">
+              <img class="img-responsive" src="../assets/images/home/FilmCrewPIC.png" alt="How it Works" />
+            </div>
+            <div class="col-sm-6">
+      
+              <ul class="steps">
+                <li>
+                  <h3>1. Create an elegant portfolio.</h3>
+                  <p>
+                    Everything in one place: IMDB page, resume, gear list, reviews, portfolio pieces and more.
+                  </p>
+                </li>
+                <li>
+                  <h3>2. Get reviewed.</h3>
+                  <p>
+                    Get reviewed by your network of peers with our innovative new industry score that helps you display 
+                    your talents and join the ranks of top film crew.
+                  </p>
+                </li>
+                <li>
+                  <h3>3. Be discovered.</h3>
+                  <p>
+                    Join a searchable network for vetted filmmakers to find and hire you for trusted gigs.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+      </ng-container>
+
+  
+  </div>
+
+</section>
+
+<section class="info" id="features">
+  <h2>Features</h2>
+  <div class="container">
+    <!-- first row -->
+    <div class="row">
+      <div class="call-out col-sm-4">
+        <img src="../assets/images/home/profiles.png" alt="Profiles" />
+        <h3>Profiles</h3>
+        <p class="desc">Create beautiful profiles in just a couple clicks.</p>
+      </div>
+      <div class="call-out col-sm-4">
+        <img src="../assets/images/home/reviews.png" alt="Reviews" />
+        <h3>Reviews</h3>
+        <p class="desc">Receive reviews from your network of filmmakers to land jobs faster.</p>
+      </div>
+      <div class="call-out col-sm-4">
+        <img src="../assets/images/home/chat.png" alt="Chat" />
+        <h3>Chat</h3>
+        <p class="desc">Integrated chat with your crew members for each project.</p>
+      </div>
+    </div>
+
+    <!-- second row -->
+    <div class="row">
+      <div class="call-out col-sm-6">
+        <img src="../assets/images/home/connection.png" alt="Referrals" />
+        <h3>Referrals</h3>
+        <p class="desc">Optimize your referrals with tracking capabilities.</p>
+      </div>
+      <div class="call-out col-sm-6">
+        <img src="../assets/images/home/discovered.png" alt="Discovered" />
+        <h3>Discovered</h3>
+        <p class="desc">Be discovered by filmmakers in our new advanced search engine.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="info" id="members">
+  <h2>Members of the Week</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <ij-search-card class="card" (onRefer)="onRefer($event)" [card]="card" *ngFor="let card of cards"></ij-search-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ij-mobile-app></ij-mobile-app>
+<ij-refer-profile-dialog></ij-refer-profile-dialog>
+<ij-verify-facebook-dialog></ij-verify-facebook-dialog>
+<ij-reqhire-profile-dialog></ij-reqhire-profile-dialog>
+<ij-site-footer></ij-site-footer>

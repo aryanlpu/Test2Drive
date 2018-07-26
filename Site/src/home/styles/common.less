@@ -1,0 +1,63 @@
+@import '../../shared/styles/variables/all';
+@import '../../shared/styles/mixins/all';
+
+@section-alt-color: #F5F5F5;
+@section-spacing: 60px;
+
+.subheading {
+    margin: 0;
+    font-size: 36px;
+    color: #656565;
+    letter-spacing: 0.9px;
+    text-align: center;
+    text-transform: uppercase;
+    .font-bold();
+}
+
+.triheading {
+    margin: 0;
+    font-size: 18px;
+    color:  #484848;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    .font-bold();
+}
+
+section.info {
+    padding: @section-spacing 0;
+
+    &:nth-child(odd) {
+        background-color: @section-alt-color;
+    }
+
+    & > h2 {
+        .subheading();
+        margin-bottom: @section-spacing;
+    }
+}
+
+.h2-before-pills {
+    margin-bottom: 0 !important;
+}
+
+.pills-div{
+    text-align: center;
+    margin: 20px 0 50px 0;
+}
+
+
+.pills-div .active {
+    color: #fff !important;
+    background: #F27601 !important;
+}
+
+.pills-div a {
+    color: #000 !important;
+    background: #fff !important;    
+    font-size: 18px;
+    font-weight: 400;
+    box-shadow: none;
+    padding: 4px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+}

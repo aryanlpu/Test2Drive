@@ -1,0 +1,71 @@
+<div class="container fh" role="main">
+    <div class="abscenter">
+        <header class="welcome">
+            <a routerLink="/">
+                <img src="../assets/images/ij-large-white.png" alt="Industry Jump" />
+                <h1>Welcome to Industry Jump</h1>
+            </a>
+        </header>
+        <section id="login-container" class="form-widget mar-top">
+            <form #f="ngForm" (ngSubmit)="login(f.form.valid)" novalidate autocomplete="off">
+                <!-- <div *ngIf="!hideSocialLogin" id="facebook">
+                    <a (click)="loginWithFacebook()" class="button">
+                        <i class="fa fa-facebook-official" aria-hidden="true"></i> Log in with Facebook
+                    </a>
+                </div>
+
+                <div *ngIf="!hideSocialLogin" id="split-area">
+                    <div class="divider">
+                        <span class="lineSignup"></span>
+                        <span class="txt">or</span>
+                        <span class="lineSignup"></span>
+                    </div>
+                </div> -->
+
+                <div class="group account-verified" [ngClass]="{'hidden': !accountVerifiedMsg }">
+                    {{accountVerifiedMsg}}
+                </div>
+
+                <div class="validation-summary group" [ngClass]="{ 'hidden': !error }">
+                    {{error}}
+                    <br />
+                    <span *ngIf="isEmailNotConfirmed">
+                        <a (click)='sendMail();' style="color:orange; font:bold">Click here</a>
+                        to resend email to the address on file.
+                    </span>
+                </div>
+
+                <div class="validation-summary group" [ngClass]="{'hidden': !success}">
+                    {{success}}
+                </div>
+
+                <div class="group" [ngClass]="{invalid: this.submitted && email.invalid}">
+                    <span class="ij icon email-white"></span>
+                    <input [ij-focus]="true" #email="ngModel" type="email" name="email" [(ngModel)]="credentials.email" placeholder="Email" required email maxlength="256" />
+                </div>
+
+                <div class="group" [ngClass]="{invalid: this.submitted && password.invalid}">
+                    <span class="ij icon password-white"></span>
+                    <input #password="ngModel" type="password" name="password" [(ngModel)]="credentials.password" placeholder="Password" required maxlength="100" />
+                </div>
+
+                <div class="group text-left">
+                    <a (click)="forgotPasswordPopUp()">Forgot Password?</a>
+                </div>
+
+                <footer class="group no-mar-top">
+                    <input type="submit" id="login-btn" value="Login" />
+                </footer>
+
+                <p id="register-with-us">
+                    Don't have an account? <strong><a routerLink="/signup">Register with us.</a></strong>
+                </p>
+            </form>
+        </section>
+    </div>
+</div>
+<div id="bg">
+    <div class="upperlayer"></div>
+    <img src="assets/images/bg.jpg" alt="">
+</div>
+<ij-forgot-password-dialog></ij-forgot-password-dialog>

@@ -1,0 +1,26 @@
+
+ <form novalidate #f = "ngForm" (ngSubmit) = "saveKit(f)">
+    <div class="row kitList">
+        <div class="col-sm-6 pr-4 description"><p><input required = "true" (focus)="showCheckIcon()" [ij-input-validation] = "'Please Enter Description'" [readonly]="disabled" name="description" [(ngModel)]="description" placeholder="Description" type="text" class="form-control" 
+         > </p></div>   
+         <div class="col-sm-3 pl-3 padding-5">  
+        <div class = "input-group">
+                <span class = "input-group-addon">$</span>
+                <input  
+                    id = "rate" 
+                    name = "rate" 
+                    type = "text" 
+                    [readonly]="disabled"
+                    class = "ij-input form-control h40" 
+                    required 
+                    [ij-input-validation] = "'Please enter a rate.'"
+                    [(ngModel)] = "rate"
+                    [readonly]="rateReadOnly"
+                    >
+        
+            </div>
+        </div>
+            <div class="col-xs-1  pl-0 padding-5" *ngIf="inablefocus"><button class="KitBtn" type="submit"><img  src="../../assets/images/check-mark-button.png"> </button></div>
+            <div class="col-xs-1 padding-5"><button class="KitBtn" (click)="removeKit()"><img src="../../assets/images/Circle X.png" > </button></div>
+    </div>
+</form>

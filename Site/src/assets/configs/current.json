@@ -1,0 +1,10 @@
+{
+    "siteApiUrl": "http://localhost:50198",
+    "siteUrl": "http://localhost:4200",
+    "imageStorageUrl": "https://ijdevstorage.blob.core.windows.net/images",
+    "pdfStorageUrl": "https://ijdevstorage.blob.core.windows.net/pdfs",
+    "siteImage": "https://dev.industryjump.com/assets/images/favicons/apple-touch-icon.png",
+    "intercomKey": "w4jiuyoa",
+    "production": false,
+    "maintenance": false
+}

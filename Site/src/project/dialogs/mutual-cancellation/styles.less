@@ -1,0 +1,91 @@
+@import '../../../shared/dialogs/styles/common';
+@import '../../../shared/styles/variables/all';
+@import '../../../shared/styles/global';
+.custom-dialog ::ng-deep .ui-dialog {
+    max-width: 625px;
+    
+    .ui-dialog-titlebar{
+        border-top: 8px solid @primary-red;
+        text-transform: uppercase;
+    }
+
+    .ui-dialog-content{
+        header{
+            ij-dialog-header{
+                margin-left: 30px;
+                article{
+                    img{
+                        width: 75px;
+                        height: 75px;   
+                    }
+                }
+            }
+        }
+
+        .dialog-container{
+            padding: 0 50px 40px 50px;
+            .dialog-body{
+                label{
+                    font-weight: 400;
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        .alert-default{
+            background-color: #ffb3bc;
+        }
+
+        .mar-10{
+            margin-top: 10px;
+        }
+
+        .footer-text{
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        h4{
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        p{
+            font-size: 16px;
+        }
+
+        [styleClass="ij-checkbox"] {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 20px;
+
+            .ui-chkbox-label {
+                display: inline-block;
+                margin-bottom: 0;
+                cursor: pointer;
+            }
+        }
+
+        footer{
+            .confirm{
+                background-color: @primary-orange;
+            }
+            .deny{
+                background-color: @primary-red;
+            }
+            .button:first-of-type{
+                margin-right: 30px;
+            }
+        }
+
+        .text-orange{
+            color: @primary-orange;
+            cursor: pointer;
+        }
+    }
+}
+
+input[type="submit"] {
+    background: @btn-hire-color;
+}
+

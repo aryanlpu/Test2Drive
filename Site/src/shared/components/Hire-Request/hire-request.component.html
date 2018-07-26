@@ -1,0 +1,459 @@
+<div>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" (keydown.enter)="$event.preventDefault()" novalidate>
+    <div class="row hire-screen">
+      <!-- Contactor/Contactee -->
+      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 col1">
+        <div class="row">
+          <div class="col-sm-12 ">
+            <h1>CONTRACTOR</h1>
+          </div>
+          <div class="col-sm-4 notation">
+            <a href="">
+              <img src="{{modelContractor.header?.profileImageUrl}}"
+                   alt="{{modelContractor.header?.fullName}}" class="img-circle img-responsive" />
+            </a>
+          </div>
+          <div class="col-sm-8">
+            <h2><a href="">{{modelContractor.header?.fullName}}</a></h2>
+            <h3>{{modelContractor.header?.hireableCrewRoles}}</h3>
+            <p>{{modelContractor.header?.location}}</p>
+          </div>
+        </div>
+        <div class="row mt178">
+          <div class="col-sm-12">
+            <h1>CONTRACTEE</h1>
+          </div>
+          <div class="col-sm-4 ">
+            <a href="">
+              <img src="{{modelContractee.header?.profileImageUrl}}"
+                   alt="{{modelContractee.header?.fullName}}" class="img-responsive img-circle" />
+            </a>
+          </div>
+          <div class="col-sm-8">
+
+            <h2><a href="">{{modelContractee.header?.fullName}}</a></h2>
+            <h3>{{modelContractee.header?.hireableCrewRoles}}</h3>
+            <p>{{modelContractee.header?.location}}</p>
+          </div>
+
+        </div>
+      </div>
+      <!-- End Contractor/Contractee -->
+      <!-- Hire Detail -->
+      <div class="col-sm-12  col-md-6  col-lg-7 col-xl-7 col2">
+        <h1>Hire Request</h1>
+        <p>You are preparing to  send a hire request to  <b> {{modelContractee.header?.fullName}} </b> Please fill in the project details below. Once you hit submit request,  <b> {{modelContractee.header?.fullName}} </b> will be sent the hire request.</p>
+
+        <h2>Payment Details</h2>
+        <div class="row form-group marginUpperField">
+
+          <div class="col-sm-3 title"><p> Project Type</p></div>
+          <div class="col-sm-7 hirePadding">
+            <p-autoComplete id="projectType"
+                            name="projectType"
+                            placeholder="Commercial, Film..."
+                            autoHighlight="true"
+                            dropdown="true"
+                            required
+                            [(ngModel)]="model.projectType"
+                            forceSelection="true"
+                            [suggestions]="projectTypeSuggestions"
+                            (onSelect)="selectProjectType($event)"
+                            [ij-input-validation]="'Select a Project Type.'"
+                            (completeMethod)="onProjectTypesKeyDown($event)">
+
+            </p-autoComplete>
+
+          </div>
+        </div>
+        <div class="row form-group marginUpperField" *ngIf="projectType == 'Music Video'">
+          <div class="col-sm-3 title"><p> Song Title</p></div>
+          <div class="col-sm-7 hirePadding">
+            <p>
+              <p-autoComplete id="songTitle"
+                              name="songTitle"
+                              (onSelect)="selectSongTitle($event)"
+                              placeholder="Song title"
+                              required
+                              autoHighlight="true"
+                              field="songTitle"
+                              [(ngModel)]="songTitle"
+                              [suggestions]="songTitleSuggestions"
+                              (completeMethod)="onSongTitleKeyDown($event)"
+                              [ij-input-validation]="'Select a song title.'">
+              </p-autoComplete>
+              <span (click)="onClear()" class="ij icon x-icon autocomplete-cross"></span>
+            </p>
+          </div>
+        </div>
+        <div class="row form-group marginUpperField" *ngIf="projectType == 'Music Video'">
+          <div class="col-lg-3 title"><p>Artist Title</p></div>
+          <div class="col-sm-7 hirePadding">
+            <span>
+              <input id="artistTitle"
+                     name="artistTitle"
+                     #focusable [(ngModel)]="model.artistTitle"
+                     required maxlength="256"
+                     type="text" class="form-control"
+                     [ij-input-validation]="'Enter artist title.'"
+                     (componentBindValue)="hasUserFromSystem($event)" />
+            </span>
+          </div>
+        </div>
+
+        <div class="row form-Group marginUpperField" *ngIf="projectType == 'Web Series' || projectType == 'Television Show'">
+          <div class="col-sm-3 title"><p>Episode Title</p></div>
+          <div class="col-sm-7 hirePadding">
+            <p>
+              <p-autoComplete autoHighlight="true"
+                              name="episodeTitle"
+                              [(ngModel)]="episodeTitle"
+                              (onSelect)="selectEpisodeTitle($event)"
+                              [suggestions]="episodeTitleSuggestions"
+                              (completeMethod)="onEpisodeTitleKeyDown($event)"
+                              [ij-input-validation]="'Select a Episode title.'"
+                              field="episodeTitle" placeholder="Episode title">
+              </p-autoComplete>
+              <span (click)="onClear()" class="ij icon x-icon autocomplete-cross"></span>
+            </p>
+          </div>
+
+        </div>
+
+        <div class="row form-Group marginUpperField" *ngIf="projectType == 'Web Series' || projectType == 'Television Show'">
+          <div class="col-sm-3 title"><p>Series Title</p></div>
+          <div class="col-sm-7 hirePadding">
+            <p>
+              <input id="seriesTitle"
+                     name="seriesTitle"
+                     required maxlength="256"
+                     #focusable [(ngModel)]="model.seriesTitle"
+                     type="text" class="form-control"
+                     [ij-input-validation]="'Enter series title.'"
+                     (componentBindValue)="hasUserFromSystem($event)" />
+            </p>
+
+          </div>
+        </div>
+
+        <div class="row form-group" *ngIf="projectType!='Web Series' && projectType != 'Television Show' && projectType!='Music Video' && projectType!='empty'">
+          <div class="col-sm-3 title"><p>Project Title </p></div>
+          <div class="col-sm-7 hirePadding">
+            <p>
+              <p-autoComplete id="projectName"
+                              name="projectName"
+                              autoHighlight="true"
+                              required
+                              field="projectName" [size]="30"
+                              placeholder="Project Title" [minLength]="1"
+                              [ij-input-validation]="'Select a project title.'"
+                              [(ngModel)]="projectName"
+                              (onSelect)="onSelect($event)"
+                              [suggestions]="suggestions"
+                              (completeMethod)="onKeyDown($event)">
+              </p-autoComplete>
+              <span (click)="onClear()" class="ij icon x-icon autocomplete-cross"></span>
+            </p>
+          </div>
+        </div>
+        <div class="row form-Group marginCompany">
+          <div class="col-sm-3 title"><p>Project Role(s)</p></div>
+          <div class="col-sm-7 hirePadding">
+            <p>
+              <p-autoComplete id="crewRoles"
+                              name="crewRoles"
+                              (onUnselect)="onDataItem($event)"
+                              placeholder="Director, Producer..."
+                              autoHighlight="true" required="true"
+                              forceSelection="true" dropdown="true"
+                              (onSelect)="onSelectData($event)"
+                              [(ngModel)]="model.crewRoles" [suggestions]="crewRoleSuggestions"
+                              (completeMethod)="onCrewRolesKeyDown($event)"
+                              [ij-input-validation]="'Select up to 3 roles.'"
+                              [multiple]="true">
+              </p-autoComplete>
+
+            </p>
+          </div>
+        </div>
+
+        <div class="row form-Group marginCompany">
+          <div class="col-sm-3 title"><p>Production Company</p></div>
+          <div class="col-sm-7 hirePadding">
+            <p>
+              <input id="productionCompany"
+                     name="productionCompany" #focusable
+                     maxlength="256"
+                     [(ngModel)]="model.productionCompany"
+                     [ij-input-validation]="'Enter a production company.'"
+                     type="text" class="form-control" (componentBindValue)="hasUserFromSystem($event)" />
+            </p>
+          </div>
+        </div>
+        <div class="row form-Group marginCompany">
+          <div class="col-sm-3 title"><p>Prep Days</p></div>
+          <div class="col-sm-7 hirePadding">
+            <p>
+              <p-calendar id="prepDay"
+                          name="prepDay"
+                          appendTo="body"
+                          selectionMode="multiple"
+                          readonlyInput="readonlyInput"
+                          placeholder="Select..."
+                          [(ngModel)]="model.prepDay"
+                          [ij-input-validation]="'Please select one or more dates.'">
+              </p-calendar>
+            </p>
+          </div>
+        </div>
+        <div class="row form-group marginCompany">
+          <div class="col-sm-3 title"><p>Shoot Days</p></div>
+          <div class="col-sm-7 hirePadding">
+            <p>
+              <p-calendar id="shootDay"
+                          name="shootDay"
+                          appendTo="body"
+                          selectionMode="multiple"
+                          readonlyInput="readonlyInput"
+                          placeholder="Select..."
+                          required
+                          [(ngModel)]="model.shootDay"
+                          [ij-input-validation]="'Please select one or more dates.'">
+              </p-calendar>
+            </p>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-sm-3 title"><p>Wrap Days</p></div>
+          <div class="col-sm-7  hirePadding">
+            <p>
+              <p-calendar id="wrapDay"
+                          name="wrapDay"
+                          appendTo="body"
+                          readonlyInput="readonlyInput"
+                          placeholder="Select..."
+                          [(ngModel)]="model.wrapDay"
+                          [ij-input-validation]="'Please select one or more dates.'">
+              </p-calendar>
+            </p>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-3 title"><p>Rate</p></div>
+          <div class="col-sm-4  hirePadding">
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              <input id="rate"
+                     name="rate"
+                     type="text"
+                     class="ij-input form-control"
+                     required
+                     [(ngModel)]="model.rate"
+                     [textMask]="{mask: rateMask}"
+                     [ij-input-validation]="'Please enter a rate.'">
+              <span class="input-group-addon">.00</span>
+            </div>
+          </div>
+          <div class="col-sm-3 group selectOtn hirePadding">
+            <select class="form-control h40" required="true" name="rateType" id="rateType" [(ngModel)]="model.rateType" [ij-input-validation]="'Please select a rate schedule.'">
+              <option disabled value="">Select Schedule</option>
+              <option>Daily</option>
+              <option>Flat</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="row form-group cityState" 
+        #address="ijAddress"
+        ngModelGroup="address" 
+        ij-address
+        [ij-city]="city"
+        [ij-state]="state"
+        [ij-city-state]="cityState">
+          <div class="col-sm-3 title"><p>City and State</p></div>
+          <div class="col-sm-4 group hirePadding" [ngClass]="{invalid: submitted && (city.invalid || address.invalid)}">
+              <p>
+              <input id="city"
+              name="city" 
+              #city="ngModel" 
+              type="text"
+              class="form-control h40"
+              [ngModel]="model.city | titlecase"
+              (ngModelChange)="model.city=$event"
+              placeholder="City *" 
+              required
+              minlength="2"
+              maxlength="128" />
+            </p>
+          </div>
+          <div class="col-sm-3 group selectOtn hirePadding" [ngClass]="{invalid: submitted && (state.invalid || address.invalid)}">
+            <!-- <select id="state"
+                    name="state"
+                    class="form-control"
+                    required
+                    placeholder="State"
+                    [ij-input-validation]="'Select a state'"
+                    [(ngModel)]="model.state">
+                  <option *ngFor="let s of states"
+                      [disabled]="s.abbreviation == ''"
+                      [ngValue]="s.abbreviation">
+                       {{s.name}}
+              </option>
+            </select> -->
+
+            <select 
+                required
+                name="state"
+                #state="ngModel"
+                [(ngModel)]="model.state"
+                class="form-control h40"
+                >
+                <option 
+                    *ngFor="let s of states"
+                    [disabled]="s.abbreviation == ''"
+                    [ngValue]="s.abbreviation">{{s.name}}</option>
+            </select>
+          </div>     
+       
+        </div>
+        <div class="row form-group errorMessage" *ngIf="submitted && address.invalid">
+            <div class="col-sm-3 "></div>
+            <div class="col-sm-7 ">
+                Please enter a valid city and state.
+            </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-3 title"><p>Message</p></div>
+          <div class="col-sm-7 hirePadding">
+            <p>
+              <textarea id="message"
+                        name="message"
+                        class="form-control"
+                        rows="5"
+                        maxlength="512"
+                        [ij-input-validation]="'You have enter too long message.'"
+                        [(ngModel)]="model.message"></textarea>
+            </p>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-3 title"><p>Payment  Delivery</p></div>
+          <div class="col-sm-4 hirePadding">
+            <p>
+              <p-calendar id="paymentDate"
+                          name="paymentDate"
+                          appendTo="body"
+                          readonlyInput="readonlyInput"
+                          placeholder="Select..."
+                          required
+                          [(ngModel)]="model.paymentDate"
+                          [ij-input-validation]="'Please select one or more dates.'">
+              </p-calendar>
+            </p>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-3 title"><p>Payment  Method</p></div>
+          <div class="col-sm-4 group selectOtn hirePadding">
+            <select id="paymentMethod"
+                    name="paymentMethod"
+                    [(ngModel)]="model.paymentMethod"
+                    required="true"
+                    placeholder="select"
+                    class="ij-input form-control h40"
+                    [ij-input-validation]="'Please select payment Method.'">
+              <option value="" disabled>Payment Method *</option>
+              <option value="ACH Deposit">ACH Deposit</option>
+            </select>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-4 title"><p>Due Now</p></div>
+          <div class="col-sm-4"><p>$0</p></div>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-4 title"><p>Due March 28th</p></div>
+          <div class="col-sm-4"><p>$12310</p></div>
+        </div>
+        <div class="">
+
+          <div class="row pay">
+            <div class="col-sm-12 col-md-6 col-lg-4"><h1>TOTAL PAYMENT</h1></div>
+            <div class="col-sm-12 col-md-6 col-lg-4"><h1>$46457656</h1></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <span class="feature">
+                No Transactional fees
+                <span class="checkmark">&#10003;</span>Direct Deposit<span class="checkmark">&#10003;</span>Automated Bookkeeping<span class="checkmark">&#10003;</span>Automated 1099 Reporting
+              </span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 imgFitRadioOpt">
+              <span class="imgFit imgFitR">
+                <input type="radio" name="paymentPolicy" id="paymentPolicy" [checked]="hireTerms" (change)="selectionHireTerms(true)" />
+                <span class="checkmarkRadioOtp" [ngClass]="{'requiredPolicy':!hireTerms && requiredPolicy}" ></span>
+              </span><a (click)="showHirePolicy()">You must read and accept Industry Jumps payment policy first</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 imgFitRadioOpt">
+              <span class="cancel imgFitR">
+                <input type="radio"  name="cancelationPolicy" id="cancelationPolicy" [checked]="acceptTerms" (change)="selectionCancelTerms(true)" />
+                <span class="checkmarkRadioOtp" [ngClass]="{'requiredPolicy':!acceptTerms && requiredPolicy}" ></span>
+              </span><a (click)="showCancelPolicy()">You must read and accept Industry Jumps cancelation policy first</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 imgFitRadioOpt">
+              <span class="cancel imgFitR">
+                <input type="radio" name="lateFeePolicy" id="lateFeePolicy" [checked]="lateFees"  (change)="selectionLateFeesTerms(true)" />
+                <span class="checkmarkRadioOtp" [ngClass]="{'requiredPolicy':!lateFees && requiredPolicy}" ></span>
+              </span><a (click)="showLateFeesDialog()">You must read and accept Industry Jumps late fees policy </a>
+            </div>
+          </div>
+        </div>
+        <footer>
+          <div class="col-sm-12 col-md-6 col-lg-4"><input class="acceptJobBtn" type="submit" value="Hire" /></div>
+          <div class="col-sm-12 col-md-6 col-lg-4"><button class="denyBtn">Cancel Hire Request</button></div>
+
+        </footer>
+        <div class="row">
+          <div class="col-sm-12 tipOuter"><span class="tip">Tip:</span><span class="tipcontent"> accept rate to move onto payment terms</span></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            &nbsp;
+          </div>
+        </div>
+        <div class="row">
+          <div class="mar-20 alert alert-danger" *ngIf="showSaveErrored">
+            <ul>
+              <li *ngFor="let error of errors">{{error}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12  col-md-2 col-lg-2 col-xl-2 col3">
+        <div class="row">
+          <div class="col-sm-12 mt130" *ngIf="!disabledOpacity"><h1>Required W9</h1></div>
+          <div class="col-sm-12 mt130" *ngIf="disabledOpacity"><h1>W9 not Required</h1></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 mini-130"><img src="../assets/accept_hireImages/img2.jpg" [class.decreaseOpacity]="disabledOpacity" [class.increaseOpacity]="enabledOpacity" (click)="showpdfDialog()" /></div>
+          <div class="col-sm-4 mini-130" *ngIf="!disabledOpacity"><img src="../assets/images/Circle X.png" (click)="decreateOpacity()" /></div>
+          <div class="col-sm-4 mini-130" *ngIf="disabledOpacity"><img src="../assets/images/PlusButton.png" (click)="increaseOpacity()" /></div>
+
+
+        </div>
+      </div>
+
+
+    </div>
+  </form>
+</div>
+
+

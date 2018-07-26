@@ -1,0 +1,431 @@
+<div>
+  <div  *ngIf="modelData!=undefined" class="row hire-screen">
+
+    <!-- Contactor/Contactee -->
+    <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 col1">
+      <div class="row">
+         <div class="col-sm-12 ">
+          <h1>CONTRACTOR</h1>
+        </div>
+
+        <div class="col-sm-4"><a href="/profile/{{modelData.profileHireSysID}}/overview"><img src="{{getImageUrl(modelData.hireByProfileImageUrl)}}" class="img-circle img-responsive" /></a></div>
+        <div class="col-sm-8">
+           <h2 ><a href="/profile/{{modelData.profileHireSysID}}/overview">{{modelData.hiredByProfileName}}</a></h2>
+           <h3>{{ modelData.crewRoleList }}</h3>
+           <p>{{modelData.locations }}</p>
+        </div>
+      </div>
+      <div class="row mt178">
+        <div class="col-sm-12">
+          <h1>CONTRACTEE</h1>
+        </div>
+        <div class="col-sm-4 notation" >
+          <a href="/profile/{{modelData.profileToHireSysID}}/overview"><img src="{{getImageUrl(modelData.hiredProfileImageUrl)}}" class="img-responsive img-circle" /></a>
+        </div>
+        <div class="col-sm-8">
+
+          <h2 ><a href="/profile/{{modelData.profileToHireSysID}}/overview">{{modelData.hiredProfileName}}</a></h2>
+          <h3>{{modelData.hiredCrewRoleList}}</h3>
+          <p>{{modelData.hiredLocations}}</p>
+        </div>
+
+      </div>
+    </div>
+    <!-- End Contractor/Contractee -->
+    <!-- Hire Detail -->
+    <div class="col-sm-12  col-md-6  col-lg-7 col-xl-7 col2" *ngIf="addExpense && LoginIdProfile==modelData.hiredProfileId">
+        <ij-hire-addExpanseRequest [data]="modelData.id"></ij-hire-addExpanseRequest>
+
+        <div class="row ">
+          <div [id]="modelData.id">
+            <ij-additiona-kitShow [data]="modelData.id" #parent>
+            </ij-additiona-kitShow>
+            <!-- <div #parent *ngIf="id == modelData.id"></div> -->
+          </div>
+        </div>
+        <div class="col-sm-12 kitPadding"> <span class="kit" (click)="addComponent(modelData.id)">+</span> <a (click)="addComponent(modelData.id)">Add Another Payment</a></div>
+          
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-4" *ngIf="addExpense"><button class="submitExpanse">Submit Expense</button></div>
+         </div>
+       
+
+    </div>
+
+
+    <div class="col-sm-12  col-md-6  col-lg-7 col-xl-7 col2" *ngIf="addExpense && LoginIdProfile==modelData.hiredByProfileID">
+      
+      <ij-hire-addExpanseRequestforApproval [data]="modelData.id"></ij-hire-addExpanseRequestforApproval>
+
+      <div class="row ">
+        <div [id]="modelData.id">
+          <ij-additiona-kitShow [data]="modelData.id" #parent>
+          </ij-additiona-kitShow>
+          <!-- <div #parent *ngIf="id == modelData.id"></div> -->
+        </div>
+      </div>
+      <div class="col-sm-12 kitPadding"> <span class="kit" (click)="addComponent(modelData.id)">+</span> <a (click)="addComponent(modelData.id)">Add Another Payment</a></div>
+        
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4" *ngIf="addExpense"><button class="submitExpanse">Submit Expense</button></div>
+       </div>
+     
+
+  </div>
+
+    <div class="col-sm-12  col-md-6  col-lg-7 col-xl-7 col2" *ngIf="modelData.id != hireId && ! addExpense">
+      <div *ngIf="NegotiationMade && !denied">
+        <h1>{{modelData.hiredByProfileName | uppercase}} IS REVIEWING YOUR TERMS.</h1>
+        <p>
+          You have sent updated hire terms to <span><a href="/profile/{{modelData.profileHireSysID}}/overview">{{modelData.hiredByProfileName}}</a></span>. Once an action is made, we will notify you of the results.Please wait for their response to proceed with this hire request.
+        </p>
+      </div>
+
+      <div *ngIf="responseNegotiaation && !denied">
+        <h1 style="color: #4A4A4A;">{{modelData.hiredProfileName | uppercase}} WOULD LIKE TO NEGOIATE THE TERMS  </h1>
+        <span style="color: #4A4A4A;">{{modelData.hiredProfileName | uppercase}} has requested a negotiation. Please accept or deny the updated terms below</span>
+      </div>
+      <div *ngIf="denyContractee">
+        <h1>{{modelData.hiredByProfileName | uppercase}} DENIED YOUR NEGOTIATION.</h1>
+        <p>
+        Unfortauntely, <span> <a href="/profile/{{modelData.profileHireSysID}}/overview">{{modelData.hiredByProfileName}}</a></span>  has denied your negotiations. You can try to renegotiate or accept the job with the original contract terms.
+        </p>
+      </div>
+      <div *ngIf="denyContractor">
+        <h1>{{modelData.hiredProfileName | uppercase}} IS REVIEWING YOUR TERMS.</h1>
+        <p>
+          You have sent updated hire terms to <span><a href="/profile/{{modelData.profileHireSysID}}/overview">{{modelData.hiredProfileName}}</a></span>. Once an action is made, we will notify you of the results.Please wait for their response to proceed with this hire request.
+        </p>
+      </div>
+
+      <div *ngIf="!NegotiationMade && !responseNegotiaation && !denied">
+        <h1>{{modelData.hiredProfileName | uppercase}}, YOU'RE IN HIGH DEMAND!!</h1>
+        <p>
+          <span><a href="/profile/{{modelData.profileHireSysID}}/overview">{{modelData.hiredByProfileName}}</a></span>  wants to hire you for a {{modelData.projectType}}. The project details are listed below. If you'd like to agree to the project, 
+           please click the accept button below. if you want to negotiate the terms, please presss the negotiate button.
+        </p>
+      </div>
+      <h2>Project Details</h2>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4"><p>{{modelData.projectType}}</p></div>
+        <div class="col-sm-12 col-md-6 col-lg-4"><span [class.fontColor]="originalPayments && rateChanged">{{modelData.rate | currency  }}/{{modelData.rateType}}</span>&nbsp;&nbsp;<span class="orgPayment" *ngIf="originalPayments && rateChanged">{{"was $"+OriginalPaymentDetails.rate +"/" + OriginalPaymentDetails.rateType }}</span> </div>
+      </div>
+      <div class="row">
+
+        <div>
+          <div class="col-sm-12 col-md-6 col-lg-4"><p>Prep Day</p></div>
+          <div class="col-sm-12 col-md-6" *ngIf="!noPrepDays"><span *ngFor="let d of modelData.prepDay;let count=index"><span [class.fontColor]="originalPayments && prepDayChanged">{{ d | date : 'M/d/yy' }} </span><span *ngIf="count < modelData.prepDay.length-1"> , </span>  </span>&nbsp;&nbsp;<span class="orgPayment" *ngIf="originalPayments && prepDayChanged"> <span *ngIf="OriginalPaymentDetails.prepDay.length==0 && originalPayments"> was 0 days</span><span *ngFor="let d of OriginalPaymentDetails.prepDay;let count=index"><span *ngIf="count==0 && originalPayments">was</span> {{ d | date : 'M/d/yy' }} <span *ngIf="count < OriginalPaymentDetails.prepDay.length-1"> , </span>  </span></span></div>
+          <div class="col-sm-12 col-md-6" *ngIf="noPrepDays"><span>No Prep Days</span><span *ngIf="originalPayments"></span></div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4"><p>Shoot Date</p></div>
+        <div class="col-sm-12 col-md-6">
+          <span *ngFor="let d of modelData.shootDay;let count=index"> <span [class.fontColor]="originalPayments && shootDayChanged">{{ d | date : 'M/d/yy'}}</span> <span *ngIf="count < modelData.shootDay.length-1"> , </span></span>&nbsp;&nbsp;<span class="orgPayment" *ngIf="originalPayments && shootDayChanged"><span *ngIf="OriginalPaymentDetails.shootDay.length==0 &&  originalPayments "> was 0 days</span><span *ngFor="let d of OriginalPaymentDetails.shootDay;let count=index"> <span *ngIf="count==0 && originalPayments">was</span> {{ d | date : 'M/d/yy' }} <span *ngIf="count < OriginalPaymentDetails.shootDay.length-1"> , </span> </span> </span>
+        </div>
+
+      </div>
+      <div class="row">
+
+        <div>
+          <div class="col-sm-12 col-md-6 col-lg-4"><p>Wrap Day</p></div>
+          <div class="col-sm-12 col-md-6">
+            <span *ngIf="!noWrapDay"><span [class.fontColor]="originalPayments && wrapDayChanged">{{modelData.wrapDay | date: 'M/d/yy'}}</span>&nbsp;&nbsp; <span class="orgPayment" *ngIf="originalPayments && wrapDayChanged"><span class="orgPayment" *ngIf="OriginalPaymentDetails.wrapDay =='' || OriginalPaymentDetails.wrapDay == null ">was 0 days</span><span *ngIf="OriginalPaymentDetails.wrapDay!='' && OriginalPaymentDetails.wrapDay!=null && originalPayments"> was {{ OriginalPaymentDetails.wrapDay | date : 'M/d/yy' }}</span></span></span>
+            <p *ngIf="noWrapDay"> No Wrap Day</p>
+         
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4 "><p>Role</p></div>
+        <div class="col-sm-12 col-md-6"><div><span [class.fontColor]="originalPayments && crewRolesChanged">{{modelData.crewRoles}}</span>&nbsp;&nbsp;<span class="orgPayment" *ngIf="originalPayments && crewRolesChanged">was {{OriginalPaymentDetails.crewRoles}}</span></div></div>
+        
+        <div class="col-sm-12 col-md-6 col-lg-6"></div>
+      </div>
+      <div *ngIf="!responseNegotiaation && negotiateDone">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-4"><p>{{modelData.city}}</p></div>
+          <div class="col-sm-12 col-md-6 col-lg-4"><p>{{modelData.state}}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-4"><p>Payment Delivery</p></div>
+          <div class="col-sm-12 col-md-6 col-lg-4"><p>{{modelData.paymentDate | date: 'M/d/yy' }}</p></div>
+        </div>
+      </div>
+
+
+      <!--hide-->
+      <div *ngIf="!negotiateDone">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-4"><p>Amount Receivable</p></div>
+          <div class="col-sm-12 col-md-6 col-lg-4"><p><span><a href="javascript:void();">Link your bank account</a></span></p></div>
+        </div>
+        <div class="demand">
+          <div class="row ">
+            <div class="col-sm-12 kitPadding"> <span class="kit" (click)="addComponent(modelData.id)">+</span> <a (click)="addComponent(modelData.id)">Add kit fees</a></div>
+            <div [id]="modelData.id">
+              <ij-additiona-kitShow [data]="modelData.id" #parent>
+              </ij-additiona-kitShow>
+              <!-- <div #parent *ngIf="id == modelData.id"></div> -->
+            </div>
+          </div>
+
+          <div class="row mt30">
+            <div class="col-sm-12">
+
+              <span class="imgFit"><img src="{{getImageUrl(modelData.hireByProfileImageUrl)}}" class="img-circle img-circleThin img-responsive" /> </span>
+              <span class="usermsg"><b>{{modelData.message}}!</b></span>
+            </div>
+          </div>
+          <div class="row mt40">
+            <div class="col-sm-12 col-md-6 col-lg-4"><p>Total Payment</p></div>
+            <div class="col-sm-12 col-md-6 col-lg-4"><p>{{ '$'+modelData.TotalPayment }}</p></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4"><p>5% Industry Jump Fees </p></div>
+            <div class="col-sm-12 col-md-6 col-lg-4"><p>-{{'$'+ deductionTwoDigit}}</p></div>
+          </div>
+          <div class="row pay">
+            <div class="col-sm-12 col-md-6 col-lg-4"><h1>TOTAL PAYMENT</h1></div>
+            <div class="col-sm-12 col-md-6 col-lg-4"><h1>{{'$'+ totalPaymentTwoDigit}}</h1></div>
+          </div>
+          <div *ngIf="!NegotiationMade">
+            <div class="row">
+              <div class="col-sm-12"><span class="feature">No Transactional fees<span class="checkmark">&#10003;</span>Direct Deposit<span class="checkmark">&#10003;</span>Automated Bookkeeping<span class="checkmark">&#10003;</span>Automated 1099 Reporting</span></div>
+            </div>
+
+            <div class="row" *ngIf="!responseNegotiaation">
+              <div class="col-sm-12 imgFitRadioOpt">
+                <span class="imgFit imgFitR">
+                  <input type="radio" name="opt1" id="paymentpolicy" [checked]="hireTerms" (change)="onSelectionRadioChange(true)" />
+                  <span class="checkmarkRadioOtp" [ngClass]="{'requiredPolicy':!hireTerms && requiredPolicy}"></span>
+                </span><a (click)="showHirePolicy()">You must read and accept Industry Jumps payment policy first</a>
+              </div>
+            </div>
+            <div class="row" *ngIf="!responseNegotiaation">
+              <div class="col-sm-12 imgFitRadioOpt">
+                <span class="cancel imgFitR">
+                  <input type="radio" name="opt2" id="cancelationpolicy" [checked]="acceptTerms" (change)="onSelectionChange(true)" />
+                  <span class="checkmarkRadioOtp" [ngClass]="{'requiredPolicy':!acceptTerms && requiredPolicy}"></span>
+                </span><a (click)="showCancelPolicy()">You must read and accept Industry Jumps cancelation policy first</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!NegotiationMade && !denyContractor" class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4" *ngIf="!addExpense"><button class="acceptJobBtn" (click)="acceptHireDetail(modelData.id)">Accept</button></div>
+        <div *ngIf="!responseNegotiaation" class="col-sm-12 col-md-6 col-lg-4"><button class="negoigateBtn"  (click)="negotiate(modelData.id)">Negotiate</button></div>
+        <div class="col-sm-12 col-md-6 col-lg-4" *ngIf="!addExpense"><button class="denyBtn" (click)="deniedNegotation(modelData.id)">Deny</button></div>
+        <div class="col-sm-12 col-md-6 col-lg-4" *ngIf="addExpense"><button class="denyBtn">Cancel</button></div>
+      </div>
+      <div *ngIf="denyContractor" class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4"><button (click)="cancelDialogbox()" class="denyBtn">Cancel</button></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4" *ngIf="denyContractee"><button class="acceptJobBtn" (click)="acceptHireDetail(modelData.id)">Accept</button></div>
+        <div *ngIf="denyContractee" class="col-sm-12 col-md-6 col-lg-4"><button class="negoigateBtn" (click)="negotiate(modelData.id)">Negotiate</button></div>
+        <div *ngIf="NegotiationMade" class="col-sm-12 col-md-6 col-lg-4"><button class="btn-lrg" (click)="cancelDialogbox()">Cancel Hire Request</button></div>
+        <div class="clearfix"></div>
+        <div class="historyDisplay">
+          <div *ngFor="let a of negoiationHistory">
+            <div class="row">
+              <div class="col-sm-12">
+
+                <span class="imgFit" *ngIf="a.profileId==modelData.hiredProfileId"><img src="{{getImageUrl(modelData.hiredProfileImageUrl)}}" class="img-circle img-circleThin img-responsive" /> </span>
+                <span class="imgFit" *ngIf="a.profileId==modelData.hiredByProfileID"><img src="{{getImageUrl(modelData.hireByProfileImageUrl)}}" class="img-circle img-circleThin img-responsive" /> </span>
+                <p class="usermsg migrationhistoryText"> {{a.history}}</p>
+              </div>
+            </div>
+
+            <br />
+          </div>
+        </div>
+        
+      </div>
+
+      <!--hide-->
+      <div class="row">
+        <div class="col-sm-12">
+          &nbsp;
+        </div>
+      </div>
+    </div>
+    <!-- End Hire Detail -->
+   <!-- Invoice --> 
+     <div class="col-sm-12  col-md-2 col-lg-2 col-xl-2 col3" *ngIf="modelData.id != hireId" >
+            <div class="row">
+                 <div class="col-sm-12 mt130"><h1>Required</h1></div>
+            </div>
+            <div class="row">
+                 <div class="col-sm-4">
+                  <!-- <p-lightbox [images]="images" easing="ease-in" effectDuration="1500ms"></p-lightbox> -->
+                    <img src="../assets/accept_hireImages/w9.jpg" class="w9Img" [class.increaseOpacity]="isW9Uploaded" /> 
+                    </div>
+                 <div class="col-sm-12" *ngIf="disabledOpacity"><a href="javascript:void()" (click)="increaseOpacity()" >Click to send W9</a></div>
+                 <div class="col-sm-12" *ngIf="!disabledOpacity"><a href="javascript:void()" (click)="decreasedOpacity()" >Click to Remove</a></div>
+            </div>
+        </div>
+    <!-- End Invoice -->
+   
+      <!-- Edit Negotiate -->
+      <div class="col-sm-12  col-md-6  col-lg-7 col-xl-7 col2 " *ngIf="modelData.id == hireId">
+
+        <h1>{{modelData.hiredProfileName}}, YOU'RE IN HIGH DEMAND!</h1>
+        <p>
+          <span>{{modelData.hiredByProfileName}}</span>  wants to hire you for a {{modelData.projectType}}. The project details are listed below. If you'd like to agree to the project
+          ,please click the accept button below. if you want to negotiate the terms, please presss the negotiate button.
+        </p>
+        <h2>Project details</h2>
+        <div class="row mb-20">
+          <div class="col-xs-12 col-sm-2 col-md-3 col-lg-2 mtop-7"><p>{{modelData.projectType}}</p></div>
+          <div class="col-xs-12 col-sm-5 col-md-6 col-lg-5 pr-4">
+            <div class="row">
+              <div class="col-sm-6 pr-4">
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input id="rate"
+                         name="rate"
+                         type="text"
+                         [readonly]="disabledrate"
+                         class="ij-input form-control"
+                         required
+                         [(ngModel)]="modelData.rate"
+                         style="height: 34px;">
+
+
+                </div>
+              </div>
+              <div class="col-sm-6 pl-4">
+                <p>
+                  <select [disabled]="disabledrate"
+                          id="rateType"
+                          [(ngModel)]="modelData.rateType"
+                          name="rateType"
+                          class="form-control">
+                    <option disabled value="0">Select Schedule</option>
+                    <option>Daily</option>
+                    <option>Weekly</option>
+                    <option>Flat</option>
+                  </select>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-4 pl-4  mtop-7">
+            <div class="col-xs-1 col-sm-4 col-md-6 col-lg-3 pl-0"><img (click)="saveRate(modelData.id,modelData.rate,modelData.rateType)" src="../../assets/images/check-mark-button.png"> </div>
+            <div class="col-xs-1 col-sm-4 col-md-6 col-lg-3"><img src="../../assets/images/Circle X.png" (click)="getOriginal('rate',modelData.id)"> </div>
+          </div>
+        </div>
+        <div class="row mb-20">
+          <div class="col-xs-12 col-sm-2 col-md-3 col-lg-2 mtop-7"><p>Prep Day</p></div>
+          <div class="col-xs-12 col-sm-5 col-md-6 col-lg-5 pr-4">
+            <p>
+              <!-- <input type="text" class="form-control" value="N/A"></p> -->
+              <p-calendar id="dates"
+                          name="dates"
+                          [disabled]="disabledPrepDay"
+                          appendTo="body"
+                          readonlyInput="readonlyInput"
+                          selectionMode="multiple"
+                          [(ngModel)]="modelData.prepDate"
+                          placeholder="Select...">
+              </p-calendar>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-4 pl-4  mtop-7">
+            <div class="col-xs-1 col-sm-4 col-md-6 col-lg-3 pl-0"><img (click)="savePrepDay(modelData.id,modelData.prepDate)" src="../../assets/images/check-mark-button.png"> </div>
+            <div class="col-xs-1 col-sm-4 col-md-6 col-lg-3"><img src="../../assets/images/Circle X.png" (click)="getOriginal('prepDate',modelData.id)"> </div>
+          </div>
+        </div>
+        <div class="row mb-20">
+          <div class="col-xs-12 col-sm-2 col-md-3 col-lg-2 mtop-7"><p>Shoot Day</p></div>
+          <div class="col-xs-12 col-sm-5 col-md-6 col-lg-5 pr-4">
+            <p>
+              <p-calendar id="shootdates"
+                          name="dates"
+                          [disabled]="disabledShootDay"
+                          appendTo="body"
+                          selectionMode="multiple"
+                          readonlyInput="readonlyInput"
+                          placeholder="Select..."
+                          [(ngModel)]="modelData.shootDate">
+              </p-calendar>
+            </p>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-4 pl-4  mtop-7">
+            <div class="col-xs-1 col-sm-4 col-md-6 col-lg-3 pl-0"><img (click)="saveShootDay(modelData.id,modelData.shootDate)" src="../../assets/images/check-mark-button.png"> </div>
+            <div class="col-xs-1 col-sm-4 col-md-6 col-lg-3"><img src="../../assets/images/Circle X.png" (click)="getOriginal('shootDate',modelData.id)"> </div>
+          </div>
+        </div>
+        <div class="row mb-20">
+          <div class="col-xs-12 col-sm-2 col-md-3 col-lg-2 mtop-7"><p>Wrap Day</p></div>
+          <div class="col-xs-12 col-sm-5 col-md-6 col-lg-5 pr-4">
+            <p>
+              <p-calendar id="shootdates"
+                          name="dates"
+                          appendTo="body"
+                          [disabled]="disabledWrapDay"
+                          readonlyInput="readonlyInput"
+                          placeholder="Select..."
+                          [(ngModel)]="modelData.wrapDay">
+              </p-calendar>
+            </p>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-4 pl-4 mtop-7">
+            <div class="col-xs-1 col-sm-4 col-md-6 col-lg-3 pl-0"><img (click)="saveWrapDay(modelData.id,modelData.wrapDay)" src="../../assets/images/check-mark-button.png"> </div>
+            <div class="col-xs-1 col-sm-4 col-md-6 col-lg-3"><img src="../../assets/images/Circle X.png" (click)="getOriginal('wrapDate',modelData.id)"> </div>
+          </div>
+        </div>
+        <div class="row mb-20">
+          <div class="col-xs-12 col-sm-2 col-md-3 col-lg-2 mtop-7"><p>Role</p></div>
+          <div class="col-xs-12 col-sm-5 col-md-6 col-lg-5 pr-4">
+            <p>
+              <p-autoComplete id="crewRoleDetails"
+                              name="crewRoleDetails"
+                              [readonly]="disabledCrewRoles"
+                              [(ngModel)]="modelData.crewRoleDetails"
+                              [disabled]="disabledCrewRoles"
+                              placeholder="Director, Producer..."
+                              autoHighlight="true" required="true"
+                              forceSelection="true" dropdown="true"
+                              [suggestions]="crewRoleSuggestions"
+                              styleClass="wrap"
+                              (completeMethod)="onCrewRolesKeyDown($event,modelData.crewRoleDetails)"
+                              [multiple]="true">
+
+              </p-autoComplete>
+
+            </p>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-4 pl-4 mtop-7">
+            <div class="col-xs-1 col-sm-4 col-md-6 col-lg-3 pl-0"><img (click)="saveCrewRole(modelData.id,modelData.crewRoleDetails)" src="../../assets/images/check-mark-button.png"> </div>
+            <div class="col-xs-1 col-sm-4 col-md-6 col-lg-3"><img src="../../assets/images/Circle X.png" (click)="getOriginal('role',modelData.id)"> </div>
+          </div>
+        </div>
+        <div class="row mb-20">
+          <div class="col-xs-12 col-sm-2 col-md-3 col-lg-2 mtop-7"><p>{{modelData.city}}</p></div>
+          <div class="col-xs-12 col-sm-5 col-md-6 col-lg-5 pr-4 mtop-7"><p>{{modelData.state}}</p></div>
+
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-4 pl-4">
+        
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-4"><button class="acceptJobBtn" (click)="acceptHireDetail(modelData.id)">Accept</button></div>
+          <div class="col-sm-12 col-md-6 col-lg-4"><button class="negoigateBtn" (click)="negotiateNotification(modelData.id)">Confirm Negotiate</button></div>
+        </div>
+
+      </div>
+      <!-- End Negotiate   -->
+
+    </div>
+  </div>
+    
+    <div *ngIf="modelData == undefined">
+    Record not found
+    </div>

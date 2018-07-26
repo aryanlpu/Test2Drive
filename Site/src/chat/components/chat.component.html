@@ -1,0 +1,406 @@
+<div class="chatbox" *ngIf="dialogVisible">
+
+  <div class="left-chat">
+
+    <div *ngFor="let chatWindow of model.multipleChatWindows; let i=index" id="{{chatWindow.fromUserId}}" class="chat-person"
+      [ngClass]="{'min-chat-person':chatWindow.hideChatBox, 'active-chat': model.chatIsActive}">
+
+      <!-- desktop devices -->
+      <div class="show-on-desktop" [hidden]="chatWindow.isMobileView==true">
+        <div class="chat-max">
+          <div class="person">
+            <div class="setting">
+              <ul *ngIf="!chatWindow.hideChatBox" class="text-right list-inline dropdown">
+                <!-- <li class="dropdown-toggle">
+                    <a (click)="showhideSettingBox(chatWindow.fromUserId)" title="Settings">
+                      <i class="fa fa-cog" aria-hidden="true"></i>
+                    </a>
+                    <ul class="dropdown-menu" *ngIf="chatWindow.hideSettingBox==false">
+                      <li>
+                        <a>
+                          <label class="switch">
+                            <input type="checkbox" [(ngModel)]="chatWindow.setting.isMute" (change)="ChangeSenderNotification(chatWindow.fromUserId,chatWindow.setting.isMute,chatWindow.setting.isAllow,chatWindow.setting.isBlock)">
+                            <span class="slider round"></span>
+                          </label> Mute
+                        </a>
+                      </li>
+                      <li>
+                        <a>
+                          <label class="switch">
+                            <input type="checkbox" [(ngModel)]="chatWindow.setting.isAllow" (change)="ChangeSenderNotification(chatWindow.fromUserId,chatWindow.setting.isMute,chatWindow.setting.isAllow,chatWindow.setting.isBlock)">
+                            <span class="slider round"></span>
+                          </label> Allow email notifications
+                        </a>
+                      </li>
+                      <li>
+                        <a>
+                          <label class="switch">
+                            <input type="checkbox" [(ngModel)]="chatWindow.setting.isBlock" (change)="ChangeSenderNotification(chatWindow.fromUserId,chatWindow.setting.isMute,chatWindow.setting.isAllow,chatWindow.setting.isBlock)">
+                            <span class="slider round"></span>
+                          </label> Block
+                        </a>
+                      </li>
+                    </ul>
+                  </li> -->
+                <li class="minibuttons">
+                  <a (click)="minimizeChatBox(chatWindow)" title="Minimise">
+                    <i class="fa fa-minus" aria-hidden="true"></i>
+                  </a>
+                </li>
+                <li class="closebuttons">
+                  <a (click)="closeChatWindow(chatWindow.fromUserId)" title="Close">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </a>
+                </li>
+              </ul>
+              <div class="chat-heading" *ngIf="chatWindow.hideChatBox" (click)="minimizeChatBox(chatWindow)">
+                <div class="person-img">
+                  <a [routerLink]="['/profile',chatWindow.profileName]">
+                    <img src="{{getProfileImageUrl(chatWindow.profilePic)}}" />
+                  </a>
+                </div>
+
+                <div *ngIf="chatWindow.unreadMessageCount == 0">
+                  <b [ngClass]="{'online-icon': chatWindow.isOnline, 'offline-icon': !chatWindow.isOnline}" class="activity-icon-mini"></b>
+                </div>
+
+                <div *ngIf="chatWindow.unreadMessageCount > 0">
+                  <span class="unread" *ngIf="chatWindow.unreadMessageCount>0 && chatWindow.unreadMessageCount<=9">{{chatWindow.unreadMessageCount}}</span>
+                  <span class="unread" *ngIf="chatWindow.unreadMessageCount > 9">9+</span>
+                </div>
+
+                <div class="person-name">
+                  <h3>{{chatWindow.fromUser}}</h3>
+                </div>
+              </div>
+
+              <div class="chat-heading" *ngIf="!chatWindow.hideChatBox">
+                <div class="person-img">
+                  <a [routerLink]="['/profile',chatWindow.profileName]">
+                    <img src="{{getProfileImageUrl(chatWindow.profilePic)}}" />
+                  </a>
+                </div>
+                <label [ngClass]="{'online-icon': chatWindow.isOnline, 'offline-icon': !chatWindow.isOnline}" class="activity-icon"></label>
+                <div class="person-name">
+                  <a [routerLink]="['/profile',chatWindow.profileName]">
+                    <h3>
+                      {{chatWindow.fromUser}}
+                    </h3>
+                  </a>
+                  <h5 class="wrap-text" id="profileRole">
+                    {{chatWindow.roles}}
+                  </h5>
+                  <h6 class="wrap-text" id="profileLocation">{{chatWindow.location}}</h6>
+                </div>
+                <div class="chat-nop">{{chatWindow.industryScore}}</div>
+              </div>
+            </div>
+            <!-- fixed -->
+
+            <!-- end -->
+
+            <div class="clearfix"></div>
+            <div *ngIf="model.hideConnectionDiv">
+              <div class="waiting" *ngIf="chatWindow.isNetworkConnected==false">Waiting network</div>
+            </div>
+
+            <div *ngIf="!chatWindow.hideChatBox" class="chat-typeing">
+              <div class="chat-body" id="chatBody" infinite-scroll [infiniteScrollUpDistance]="1.5" [infiniteScrollThrottle]="300" [scrollWindow]="false"
+                infinite-scroll-disabled="false" #scrollMe [scrollTop]="scrollMe.scrollHeight" (scrolledUp)="onScrollUp(chatWindow, scrollMe)">
+                <div *ngFor="let chat of chatWindow.chatMessages">
+                  <div class="time-show left-show">
+                    <div *ngIf="chat.fromUserId!=profileSysId">
+                      <div *ngIf="!chat.isBlock">
+                        <div class="left-text">
+                          <div class="file-box-img" *ngIf="chat.messageType=='media'">
+                            <img src="{{model.ImageStorageUrl}}{{chat.message}}" />
+                            <div class="downlaoding-img">
+                              <a href="{{model.ImageStorageUrl}}{{chat.message}}" download>
+                                <i aria-hidden="true" class="fa fa-arrow-circle-o-down"></i>
+                              </a>
+                            </div>
+                          </div>
+
+                          <div class="file-box-img" *ngIf="chat.messageType=='pdf'">
+                            <a href="{{model.PdfStorageUrl}}{{chat.message}}" class="simple-image-thumbnail" download>
+                              <img src="/assets/images/file.png" /> </a>
+                            <div class="file-pdf">
+                              <img src="/assets/images/pdfsIcon.png" /> {{chat.fileName}}
+                              <span>
+                                <a href="{{model.PdfStorageUrl}}{{chat.message}}" style="height: 25px" download>
+                                  <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+                                </a>
+                              </span>
+                            </div>
+                          </div>
+
+                          <div class="file-box-img" *ngIf="chat.messageType=='docx'">
+                            <a href="{{model.WordFileStorage}}{{chat.message}}" class="simple-image-thumbnail" download>
+                              <img src="/assets/images/file.png" /> </a>
+                            <div class="file-pdf">
+                              <img src="/assets/images/docxIcon.ico" /> {{chat.fileName}}
+                              <span>
+                                <a href="{{model.WordFileStorage}}{{chat.message}}" style="height: 25px" download>
+                                  <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+                                </a>
+                              </span>
+                            </div>
+                          </div>
+
+                          <div *ngIf="chat.messageType!='media' && chat.messageType!='pdf' && chat.messageType!='docx' " class="chat-text">
+                            {{chat.message}}
+                          </div>
+                        </div>
+
+                        <div class="mint-ago">
+                          <span>{{chat.createDate}}</span>
+                          <span>{{chat.createdOn | amFromUtc | amLocal | date:'shortTime'}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="time-show">
+                    <div *ngIf="chat.fromUserId==profileSysId">
+                      <div>
+                        <div class="right-text">
+                          <div class="file-box-img" *ngIf="chat.messageType=='media'" style="background: none">
+                            <img src="{{model.ImageStorageUrl}}{{chat.message}}" />
+                          </div>
+
+                          <div class="file-box-img" *ngIf="chat.messageType=='pdf'">
+                            <a href="{{model.PdfStorageUrl}}{{chat.message}}" class="simple-image-thumbnail" download>
+                              <img src="/assets/images/file.png" /> </a>
+                            <div class="file-pdf">
+                              <img src="/assets/images/pdfsIcon.png" /> {{chat.fileName}}
+                            </div>
+                          </div>
+
+                          <div class="file-box-img" *ngIf="chat.messageType=='docx'" style="background: none">
+                            <a href="{{model.WordFileStorage}}{{chat.message}}" class="simple-image-thumbnail" download>
+                              <img src="/assets/images/file.png" /> </a>
+                            <div class="file-pdf">
+                              <img src="/assets/images/docxIcon.ico" /> {{chat.fileName}}
+                              <span></span>
+                            </div>
+                          </div>
+
+                          <div *ngIf="chat.messageType!='media' && chat.messageType!='pdf' && chat.messageType!='docx'" class="chat-text">
+                            {{chat.message}}
+                          </div>
+                        </div>
+                        <div class="mint-ago">
+                          <span>{{chat.createDate}}</span>
+                          <span>{{chat.createdOn | amFromUtc | amLocal | date:'shortTime'}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div *ngIf="chatWindow.chatMessages.length > 0 && chatWindow.isTyping">
+                  <div class="typing-indicator pull-left">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div *ngIf="chatWindow.progressLoader==true" class="loader-img">
+                <img src="../../assets/images/chat/loader.gif">
+              </div>
+              <div *ngIf="chatWindow.invalidFile==true" class="waiting">
+                {{fileUploadError}}
+              </div>
+
+              <div class="chat-footer" *ngIf="!chatWindow.setting.isBlock">
+                <div class="file-upload">
+                  <textarea rows="2" autofocus [(ngModel)]="chatWindow.message" (keydown.enter)="onSendchat(chatWindow);false" (keyup)="showTyping(chatWindow)"
+                    class=" form-control col-sm-10" placeholder="What's up">
+                  </textarea>
+                  <span *ngIf="chatWindow.message && chatWindow.message != ''" (click)="onSendchat(chatWindow)" class="ij icon send-icon"></span>
+                  <input type="file" class="attach-btn hide" id="file-upload_{{chatWindow.fromUserId}}" onclick="this.value = null" (change)="fileChangeEvent($event,chatWindow.fromUserId)"
+                  />
+                  <!-- <label for="file-upload_{{chatWindow.fromUserId}}">
+                    <i class="fa fa-paperclip" aria-hidden="true"></i>
+                  </label> -->
+
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- desktop devices -->
+
+      <!-- mobile devices -->
+      <div class="mobile-chat-container hide-on-desktop" [ngClass]="{'mobile-chat-container-minimize': chatWindow.hideChatBox}">
+        <div class="chat-messenger" *ngIf="!chatWindow.hideChatBox">
+          <div class="chat-messenger-header chat-messenger-header-background">
+            <div class="header-container">
+              <div class="person-img">
+                <a target="_blank" [routerLink]="['/profile',chatWindow.profileName]">
+                  <img src="{{getProfileImageUrl(chatWindow.profilePic)}}" />
+                </a>
+              </div>
+              <label [ngClass]="{'online-icon': chatWindow.isOnline, 'offline-icon': !chatWindow.isOnline}" class="activity-icon"></label>
+              <div class="person-name">
+                <a target="_blank" [routerLink]="['/profile',chatWindow.profileName]">
+                  <h3>{{chatWindow.fromUser}}</h3>
+                </a>
+                <h5 class="wrap-text" id="profileRole">
+                  {{chatWindow.roles}}
+                </h5>
+                <h6 class="wrap-text" id="profileLocation">{{chatWindow.location}}</h6>
+              </div>
+              <div class="industry-score">{{chatWindow.industryScore}}</div>
+              <div class="buttons">
+                <i (click)="minimizeChatBox(chatWindow)" title="Minimise" class="ij-icon fa fa-minus"></i>
+                <a (click)="closeChatWindow(chatWindow.fromUserId)" title="Close">
+                  <span class="ij icon ij-icon x-icon"></span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+          <div class="chat-messenger-body">
+            <div class="chat-conversation-body-parts">
+              <div class="chat-body" id="chatBody" infinite-scroll [infiniteScrollUpDistance]="1.5" [infiniteScrollThrottle]="300" [scrollWindow]="false"
+                infinite-scroll-disabled="false" #scrollMe [scrollTop]="scrollMe.scrollHeight" (scrolledUp)="onScrollUp(chatWindow, scrollMe)">
+                <div *ngFor="let chat of chatWindow.chatMessages">
+                  <div class="time-show left-show">
+                    <div *ngIf="chat.fromUserId!=profileSysId">
+                      <div *ngIf="!chat.isBlock">
+                        <div class="left-text">
+                          <div class="file-box-img" *ngIf="chat.messageType=='media'">
+                            <img src="{{model.ImageStorageUrl}}{{chat.message}}" />
+                            <div class="downlaoding-img">
+                              <a href="{{model.ImageStorageUrl}}{{chat.message}}" download>
+                                <i aria-hidden="true" class="fa fa-arrow-circle-o-down"></i>
+                              </a>
+                            </div>
+                          </div>
+
+                          <div class="file-box-img" *ngIf="chat.messageType=='pdf'">
+                            <a href="{{model.PdfStorageUrl}}{{chat.message}}" class="simple-image-thumbnail" download>
+                              <img src="/assets/images/file.png" /> </a>
+                            <div class="file-pdf">
+                              <img src="/assets/images/pdfsIcon.png" /> {{chat.fileName}}
+                              <span>
+                                <a href="{{model.PdfStorageUrl}}{{chat.message}}" style="height: 25px" download>
+                                  <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+                                </a>
+                              </span>
+                            </div>
+                          </div>
+
+                          <div class="file-box-img" *ngIf="chat.messageType=='docx'">
+                            <a href="{{model.WordFileStorage}}{{chat.message}}" class="simple-image-thumbnail" download>
+                              <img src="/assets/images/file.png" /> </a>
+                            <div class="file-pdf">
+                              <img src="/assets/images/docxIcon.ico" /> {{chat.fileName}}
+                              <span>
+                                <a href="{{model.WordFileStorage}}{{chat.message}}" style="height: 25px" download>
+                                  <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+                                </a>
+                              </span>
+                            </div>
+                          </div>
+
+                          <div *ngIf="chat.messageType!='media' && chat.messageType!='pdf' && chat.messageType!='docx' " class="chat-text">
+                            {{chat.message}}
+                          </div>
+                        </div>
+
+                        <div class="mint-ago">
+                          <span>{{chat.createDate}}</span>
+                          <span>{{chat.createdOn | amFromUtc | amLocal | date:'shortTime'}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="time-show">
+                    <div *ngIf="chat.fromUserId==profileSysId">
+                      <div>
+                        <div class="right-text">
+                          <div class="file-box-img" *ngIf="chat.messageType=='media'" style="background: none">
+                            <img src="{{model.ImageStorageUrl}}{{chat.message}}" />
+                          </div>
+
+                          <div class="file-box-img" *ngIf="chat.messageType=='pdf'">
+                            <a href="{{model.PdfStorageUrl}}{{chat.message}}" class="simple-image-thumbnail" download>
+                              <img src="/assets/images/file.png" /> </a>
+                            <div class="file-pdf">
+                              <img src="/assets/images/pdfsIcon.png" /> {{chat.fileName}}
+                            </div>
+                          </div>
+
+                          <div class="file-box-img" *ngIf="chat.messageType=='docx'" style="background: none">
+                            <a href="{{model.WordFileStorage}}{{chat.message}}" class="simple-image-thumbnail" download>
+                              <img src="/assets/images/file.png" /> </a>
+                            <div class="file-pdf">
+                              <img src="/assets/images/docxIcon.ico" /> {{chat.fileName}}
+                              <span></span>
+                            </div>
+                          </div>
+
+                          <div *ngIf="chat.messageType!='media' && chat.messageType!='pdf' && chat.messageType!='docx'" class="chat-text">
+                            {{chat.message}}
+                          </div>
+                        </div>
+                        <div class="mint-ago">
+                          <span>{{chat.createDate}}</span>
+                          <span>{{chat.createdOn | amFromUtc | amLocal | date:'shortTime'}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div *ngIf="chatWindow.chatMessages.length > 0 && chatWindow.isTyping">
+                  <div class="typing-indicator pull-left">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chat-conversation-footer">
+            <div class="chat-composer">
+              <pre><br>
+                </pre>
+              <textarea autofocus [(ngModel)]="chatWindow.message" (keydown.enter)="onSendchat(chatWindow);false" (keyup)="showTyping(chatWindow)"
+                placeholder="What's up"></textarea>
+              <span></span>
+              <span></span>
+              <div class="chat-composer-buttons">
+                <div class="chat-composer-send-button">
+                  <span *ngIf="chatWindow.message && chatWindow.message != ''" (click)="onSendchat(chatWindow)" class="ij icon send-icon"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end mobile devices -->
+    </div>
+  </div>
+
+  <div class="min-chat-messenger-container hide-on-desktop" [ngClass]="{'hide': model.chatIsActive}">
+    <div class="chat-messenger-minimize" *ngFor="let chatWindow of model.multipleChatWindows; let i=index">
+      <div *ngIf="chatWindow.hideChatBox">
+        <div class="person-img" (click)="minimizeChatBox(chatWindow)">
+          <img src="{{getProfileImageUrl(chatWindow.profilePic)}}" />
+        </div>
+        <div class="new-messages-container" *ngIf="chatWindow.unreadMessageCount > 0">
+          <label class="new-messages">!</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

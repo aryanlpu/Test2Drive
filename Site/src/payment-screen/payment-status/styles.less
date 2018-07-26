@@ -1,0 +1,285 @@
+@import '../../shared/styles/variables/colors.less';
+.paymentStatus
+{
+    margin: 15px 0px;
+}
+.paymentStatus .centered{
+    text-align: center;
+}
+.paymentStatus .centered span.greenhead {
+    font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+    font-size: 14.14px;
+    color: #74D144;
+    letter-spacing: 0;text-transform: uppercase
+}
+
+.paymentStatus .col1 img{
+     height: 102px;
+}
+.paymentStatus .col2 img{
+    height: 79px;
+    width: 79px;
+    border-radius: 38px;
+    border: 3px solid #4A90E2;
+}
+.paymentStatus .col1 a{
+    font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+    font-size: 14px;
+    color: #4A90E2;
+    letter-spacing: 0.35px;
+}
+.paymentStatus .col1 a:hover{
+    text-decoration: none;
+}
+.paymentStatus .col1 h1{
+    font-size:20px;
+    color:#FF8410;
+    letter-spacing:0px;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 900;
+    line-height:24px;
+    padding:0 0 10px;
+    margin:0
+  } 
+.paymentStatus .col1 .head1 a{
+    font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+    font-size: 18px;
+    color: #4A90E2;
+    letter-spacing: -0.5px;
+}
+.paymentStatus .col1 .head2{
+    font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+    font-size: 14.14px;
+    color: #484848;
+    letter-spacing: 0;
+}
+.paymentStatus .col1 .head3{
+    font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+    font-size: 10.61px;
+    color: #484848;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+
+    
+}
+
+.paymentStatus .messageBtn
+{
+    background: #FF8410;
+    border-radius: 5px;
+    width:100%;
+    height:42px;
+    font-family: Lato,sans-serif;
+    margin:30px 0 20px;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 19px;
+    font-weight: 700;
+    border:none
+}
+.paymentStatus .expenseBtn
+{
+    background: #4A90E2;
+    border-radius: 5px;
+    width:100%;
+    height:42px;
+    font-family: Lato,sans-serif;
+    margin:30px 0 20px;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 19px;
+    font-weight: 700;
+    border:none
+}
+.paymentStatus .reportBtn
+{
+    background: #9013FE;
+    border-radius: 5px;
+    width:100%;
+    height:42px;
+    font-family: Lato,sans-serif;
+    margin:30px 0 20px;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 19px;
+    font-weight: 700;
+    border:none
+}
+.paymentStatus .downloadBtn
+{
+    background: #70CF3F;
+    border-radius: 5px;
+    width:100%;
+    height:42px;
+    font-family: Lato,sans-serif;
+    margin:30px 0 20px;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 19px;
+    font-weight: 700;
+    border:none
+}
+.paymentStatus .cancelBtn
+{
+    background: @primary-red;
+    border-radius: 5px;
+    width:100%;
+    height:42px;
+    font-family: Lato,sans-serif;
+    margin:30px 0 20px;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 19px;
+    font-weight: 700;
+    border:none
+}
+
+@media (max-width:767px)
+{
+  .messageBtn, .expenseBtn,.reportBtn, .downloadBtn{margin:5px 0!important }
+}
+.paymentStatus .gap
+{
+    margin:150px 0px 0px 10px;
+}
+
+.paymentStatus .centered a.cancellink{
+    font-family: Lato;
+    font-size: 14px;
+    color: #4A90E2;
+    letter-spacing: 0.35px;
+    cursor: pointer;  
+}
+
+.paymentStatus .centered a.cancellink{
+    font-family: Lato;
+    font-size: 14px;
+    color: #4A90E2;
+    letter-spacing: 0.35px;
+}
+.paymentStatus .centered a:hover.cancellink{
+    text-decoration: none;
+}
+
+.paymentStatus .greentransparentbar{
+    opacity: 0.19;
+    border: 5px solid #70CF3F; 
+}
+.paymentStatus .greenbar{
+    border: 5px solid #70CF3F; 
+}
+
+
+
+ .status-buttons a {
+    position: relative;
+    display: inline-block;
+}
+
+.status-buttons a.deactive::after {
+    content: "";
+    position: absolute;
+    opacity: 0.19;
+    border: 4px solid #70CF3F;
+    width: 100%;
+    z-index: -1;
+    top: 10%;
+    left: 0%;
+  }
+.status-buttons a.active::after {
+  content: "";
+  position: absolute;
+  border: 4px solid #70CF3F;
+  width: 100%;
+  z-index: -1;
+  top: 10%;
+  left: 0%;
+}
+
+
+@media (max-width:585px)
+{
+    // .status-buttons a.deactive::after {min-width: 90% !important;}
+    // .status-buttons a.active::after {min-width: 90% !important;}
+    .status-buttons a {min-width: 31% !important;word-break: break-all;}
+    
+}
+
+
+.status-buttons a {
+    
+    display: inline-block;
+    font-family: Lato;
+    font-size: 14.14px;
+    color: #484848;
+    letter-spacing: 0;
+    font-weight: normal;
+    margin-right: 0;
+    text-align: right;
+    min-width: 31%;
+    text-decoration: none;
+    line-height: 75px;
+    float: left;
+    position:relative
+}
+.notation{position: relative;height: 100%}
+.notation::before{content:"";background-color: #FF840F;width: 22px;height: 21px;border-radius:100%;position: absolute;right:-40%;top:38%}
+
+.status-buttons a:hover {
+  text-decoration: none;
+}
+    
+.status-buttons a.active span {
+    color: white;
+    background: #70CF3F;
+    height: 20px;
+    width: 20px;
+    right: 0%;
+    position: absolute;
+    top: 1px
+}
+.ml-43{ margin-left: 43px!important}
+.ml-135{ margin-left:135px!important}
+.mt-15{ padding: 15px 0 5px;}
+.status-buttons i{margin-right: -20%;
+    font-family: Lato;
+    font-size: 12.14px;
+    color: #484848;
+    letter-spacing: 0;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal
+}
+.status-buttons span {
+    color: white;
+    background: #70CF3F;
+    display: block;
+    height: 0px;
+    margin: 0 auto 10px;
+    padding-top: 20px;
+    width: 0px;
+    position: absolute;
+    top: 0px
+}
+.is55{position: absolute;top:-55px;font-style: normal;white-space: nowrap;right:-10%}
+.mt-20{
+    margin-top: 20px;
+}
+
+

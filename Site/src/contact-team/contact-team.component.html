@@ -1,0 +1,120 @@
+<ij-site-subheader></ij-site-subheader>
+<header id="page-header">
+    <div class="jumbo">
+        <h1>WE'RE ON CHANNEL 2</h1>
+    </div>
+    <nav class="tabs">
+        <ul>
+            <li><a routerLinkActive="active" routerLink="/about">Our Team</a></li>
+            <li><a routerLinkActive="active" routerLink="/contact">Contact Us</a></li>
+            <li><a routerLinkActive="active" routerLink="/privacy">Privacy Policy</a></li>
+            <li><a routerLinkActive="active" routerLink="/terms">Terms of Use</a></li>
+        </ul>
+    </nav>
+</header>
+<article class="main container">
+    <section class="form col-md-8">
+        <h2>Give us a Shout</h2>
+        <div class="row">
+            <div class="col-md-12">
+                We'd love to hear from you! Let us know what you think about Industry Jump or any other inquiry.
+            </div>
+        </div>  
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+            <div class="row">
+                <div class="col-md-6">
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Full Name"
+                        required
+                        maxlength="64"
+                        [ij-input-validation]="'Please enter your full name.'"
+                        class="form-control" 
+                        [(ngModel)]="model.name" />
+                </div>
+                <div class="col-md-6">
+                    <input 
+                        id="email" 
+                        name="email" 
+                        required 
+                        email 
+                        type="text" 
+                        maxlength="128"
+                        placeholder="Email"
+                        class="form-control" 
+                        [ij-input-validation]="'Please enter an email address.'"
+                        [(ngModel)]="model.email" />
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-md-12">
+                    <textarea 
+                        id="message" 
+                        name="message" 
+                        placeholder="Message" 
+                        class="form-control" 
+                        rows="7" 
+                        required 
+                        minlength="5"
+                        maxlength="512"
+                        [ij-input-validation]="'Please enter a message.'" 
+                        [(ngModel)]="model.message" #message></textarea>
+                        <ij-character-counter [element]="message"></ij-character-counter>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" value="Submit" />
+                </div>
+            </div>
+    
+            <div class="mar-20 alert alert-success" *ngIf="showSaveCompleted">Thank you. Your message has been sent!</div>
+            <div class="mar-20 alert alert-danger" *ngIf="showSaveErrored">We were unable to send your message. Please check the form and try again.</div>
+    
+            <div class="row">
+                <div class="col-md-12">
+                    To contact our executive team about partnerships, business development and more,
+                    please contact us at <a href="mailto:legal@industryjump.com">legal@industryjump.com</a>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <!-- sidebar -->
+    <aside class="sidebar col-md-offset-1 col-md-3">
+        <div class="row">
+            <div class="col-md-12">
+                <i class="fa fa-envelope-o fa-2x"></i>
+                <h3>Mailing Address</h3>
+                <address>
+                    Industry Jump<br>
+                    1077 Pacific Coast Highway #282<br>
+                    Seal Beach, CA 90740<br>
+                </address>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <i class="fa fa-at fa-2x"></i>
+                <h3>Email</h3>
+                <address>
+                    <a href="mailto:contact@industryjump.com">contact@industryjump.com</a>
+                </address>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <i class="fa fa-phone fa-2x"></i>
+                <h3>Phone</h3>
+                <p>323-673-0818</p>
+            </div>
+        </div>
+    </aside>
+</article>
+<ij-site-footer></ij-site-footer>

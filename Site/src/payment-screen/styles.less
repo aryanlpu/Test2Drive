@@ -1,0 +1,411 @@
+
+@import '../shared/styles/mixins/all';
+@import '../shared/styles/variables/colors';
+
+@avatar-width: 84px;
+@blue: #3F93F4;
+@light-gray: #888888;
+@dark-gray: #4A4A4A;
+@mobile-spacing: 15px;
+@item-spacing: 75px;
+@blue1:#7ED321;
+@green1:#3F93F4;
+@redyellow:#FF840F;
+@area-gap: 40px;
+@new-btn-size: 25px;
+@new-btn-mar: 5px;
+.project-dropdown
+{
+    display: inline;
+    position: relative;
+    top: -1px;
+    margin-left: 5px;
+    ul{
+        border:none;
+    }
+}
+.project-dropdown img {
+    height: 27px;
+    width: 27px;
+}
+.project-dropdown ul li{
+    display: block;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+
+.project-dropdown ul li a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    text-transform: none;
+    }
+    .project-dropdown ul li a:hover{
+    text-decoration:none;
+    border:none;
+    }
+.projects-container ::ng-deep .job-container{
+    .list-group {
+        margin-bottom: 120px;
+    }
+    .col-md-4{width:33.33%}
+        .col-md-6{width:50%}
+        .col-md-2{width:16.67%}
+        
+        .list-group-item{
+            padding: 15px;
+            .col-md-4{width:33.33%;float:left}
+            .col-md-6{width:50%;float:left}
+            .col-md-2{width:16.67%;float:left}
+                .nopadding{
+                    .col-sm-3{padding:0}
+                }
+            
+            .row{padding:5px 0;
+               
+                }
+            .event-date{
+                color:#888888; 
+                text-transform:capitalize; 
+                letter-spacing:0.35px;
+                font-family:Lato,sans-serif;
+                font-size:14px;
+                font-weight: 700;
+                line-height: 17px;
+                margin-top: 15px;
+                display: inline-block
+                }
+
+            .label-job-types{ 
+                color:#ffffff; 
+                text-transform:uppercase;padding: 4px 7px; 
+                letter-spacing:0.35px;
+                font-family:Lato,sans-serif;
+                font-size:10px;
+                font-weight: 700;
+                line-height: 12px;border-radius:8px;min-width:48px;display:inline-block
+            }
+
+            .label-hired{
+                background: @blue1; 
+            }
+            .label-offer{
+                background: @green1; 
+            }
+            .label-post{
+                background: @redyellow; 
+            }
+
+            .label-referral{
+                background: @btn-refer-color; 
+            }
+            .label-cancelled{
+                background: @danger-red;
+            }
+
+            .referral-img{
+                width: 25px;
+                height: 25px;
+                margin-left: 13px;
+                margin-top: 4px;
+                margin-bottom: 2px;
+            }
+
+            img{
+                width: 59px;
+                height: 59px;
+                border-radius: 50%;
+            }
+
+            .hired-info{
+                color: @dark-gray; 
+            }
+
+            .text-bold{
+                font-weight: 700;
+            }
+
+            .job-date-div{
+                width:15%;
+            }
+
+            .hired-div{
+                margin-top: 20px;
+            }
+
+            .job-text{
+                float: left;
+                padding-top: 22px;
+                max-width: 85%;
+            }
+            .containerIMG
+            {
+                width: 27px !important;
+                height: auto !important;border-radius: 0
+            }
+            .bntbneathdate
+            {
+                display:none;
+            }
+
+            .circle-badge{
+                width: 29px;
+                height: 29px;
+                border-radius: 100%;
+                display: inline-block;
+                margin-top:0px
+            }
+          
+            .offer{background-color: rgba(74,144,226,0.3)}
+            .hired{background-color:rgba(74,144,226, 1);}
+            .past{background-color:rgba(126,211,33, 1);}
+            .cancelled{background-color:@danger-red;}
+            @media  (max-width: 767px) {
+          
+                .bntbneathdate
+            {
+                display: block;
+            }
+           
+           
+                // .col-md-4{width:100%;float:none; 
+                    .col-md-4{width:100%;
+                .col-sm-3{width:25%;float:left}
+                }
+                // .col-md-6{width:100%;float:none;
+                    .col-md-6{width:100%;
+                    .job-text {
+                        float: none;
+                        padding-top: 0;
+                        max-width: 100%;
+                        clear: both;
+                        padding-top: 20px;
+                        text-align: left;
+                    }
+                }
+                // .col-md-2{width:100%;float:none;
+                    .col-md-2{width:100%;
+                    .col-sm-4{width:33.33%;float:left ;display: none;}
+                }
+            }
+        }
+
+        .list-container{
+                li{
+                    border: none;
+                    border-bottom: 1px solid #ddd;
+                    border-radius: 0;
+                }
+
+                .clickable{
+                    cursor: pointer;
+                }
+        }
+    }
+
+.projects-container ::ng-deep .job{
+    .no-record{
+        display: block;
+        text-align: center;
+        padding: 50px 30px;
+    }
+
+    .hide{
+        display: none;
+    }
+    
+    footer{
+        margin: 10px 0px;
+        text-align: center;
+    
+        button.more {
+            .more();
+        }
+        
+        .on-mobile({
+            margin: @area-gap 0;
+        })
+    }
+
+}
+
+
+//////////////////////////////
+header{
+    .title{
+        // float: left;
+        // margin-right: 7em;
+        padding: 20px 0px;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-align: left;
+        span{
+            position: relative;top:1px;
+            a:hover{text-decoration: none}
+        }
+    }
+    .brands{margin-right:5px}
+    .headdownloadbtn
+    {
+        padding: 20px 50px;
+        text-align: center;
+        
+    }
+    li{
+        a{
+            padding: 20px 30px;
+        }
+    }
+}
+
+.projectAll{border-bottom:2px solid #E6E6E6 ;padding-top:10px}
+	.nav-tabs.projectAllin{border-bottom:none}
+	.projectAll .brands{
+		color: #4A4A4A;
+		padding: .5rem 0.2rem;
+		font-size:16px;
+		font-weight: 700;
+		line-height: 19px;
+		text-transform:uppercase;
+		letter-spacing:0;
+		font-family:Lato,sans-serif;
+		text-decoration:none
+    }
+    
+
+    nav.tabs  ul.projectAllin{text-align:left}
+	nav.tabs  ul.projectAllin li a {
+	color:#000000;
+	text-decoration:none;
+	border:none;
+	border-bottom:6px solid transparent;
+	text-transform:capitalize;
+	padding:.5rem 1.5rem 5px;
+	letter-spacing:0;
+	font-family:Lato,sans-serif;
+	font-size:14px;
+	font-weight: 100;
+	line-height: 17px;
+	}
+	nav.tabs  ul.projectAllin li a.active, nav.tabs  ul.projectAllin li a:hover{
+	color:#F5A623;
+	text-decoration:none;
+	border:none;
+	border-bottom:6px solid #FF840F;
+    text-transform:capitalize;
+    padding:.5rem 1.5rem 5px;}
+   
+    
+    .direction1{
+        float: left;
+    }
+    .direction2{float: right}
+	.projectAllContent .row .badge-success{background-color: #7ED321;}
+	.projectAllContent .row .badge-primary{background-color: #3F93F4;}
+	.projectAllContent .row .badge-warning{background-color: #FF840F;}
+	.projectAllContent .row .proDesc{color:#515151;  
+	letter-spacing:0.31px;
+	font-family:Lato,sans-serif;
+	font-size:17px;
+	font-weight: 100;
+	line-height: 21px;}
+	.projectAllContent .opacity30{ opacity: 0.3;
+    filter: alpha(opacity=30);}
+	.projectAllContent .offer{background-color: rgba(74,144,226,0.3);width: 29px;height: 29px;border-radius: 100%;display: inline-block;margin-top:5px}
+	.projectAllContent .hired{background-color:rgba(74,144,226, 1);width:29px;height:29px;border-radius:100%;display: inline-block;margin-top:5px}
+	.projectAllContent .past{background-color:rgba(126,211,33, 1);width:29px;height:29px;border-radius:100%;display: inline-block;margin-top:5px}
+	.projectAllContent .row .proDesc b{font-weight:700}
+	.projectAllContent .row.divider{box-shadow: #ccc 0px 1px 3px;}
+	
+	@media (min-width:768px)  {
+        nav.tabs  ul.projectAllin li a{padding:.5rem 1.5rem 5px;}
+        .col-md-4{width:33.33%}
+        .col-md-6{width:50%}
+        .col-md-2{width:16.67%}
+        .headdownloadbtn{display: block;}
+	}
+    @media  (max-width: 767px) {
+	.projectAll{padding-bottom:10px}
+	.projectAll .brands{display:block;width:100%}
+	nav.tabs  ul.projectAllin li a, nav.tabs  ul.projectAllin li a.active, nav.tabs  ul.projectAllin li a:hover{padding:.5rem .5rem 5px;}
+    .nav-tabs.projectAll .nav-item.offset-sm-1{margin:0}
+    .headdownloadbtn{display: none;}
+    nav.tabs ul{text-align: center}
+    nav.tabs ul li{width:32%;margin-right:5%}
+    nav.tabs ul li a{padding:20px 0;width:100% ; text-align: center}
+
+        .projects-container ::ng-deep .job-container{
+            .list-group-item{
+                .event-date{margin-top:0px;margin-bottom:10px}
+            }
+        }
+	}
+	@media screen and (max-width: 460px) {
+	.projectAll{border-bottom-width:2px}
+	.projectAllin .brands{display:block;width:100%;padding-left:10px}
+	nav.tabs  ul.projectAllin li a, nav.tabs  ul.projectAllin li a.active, nav.tabs  ul.projectAllin li a:hover{padding:.5rem .5rem 5px;font-size:14px;border-bottom-width:3px}
+	.nav-tabs.projectAllin .nav-item.offset-sm-1{margin:0}
+	}
+.past{background-color:rgba(126,211,33, 1);width:29px;height:29px;border-radius:100%;display: inline-block;margin-top:5px}
+
+
+.new-project {
+    background-color: @primary-blue;
+    width: @new-btn-size;
+    height: @new-btn-size;
+    line-height: @new-btn-size;
+    margin-right: @new-btn-mar;
+    padding: 0;
+    border: 0;
+    color: #fff;
+    border-radius: 100%;
+    font-size: 20px;
+    font-weight: 400;
+    vertical-align: middle;
+    
+    span{
+        line-height: 22px;
+        vertical-align: text-top;
+    }
+}
+
+.hirecontainer {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+a.disabled {
+    color: gray;
+    cursor: not-allowed;
+}
+.hireActive{
+    color: #F27601;
+    text-decoration: none;
+    border-bottom: 5px solid #F27601;
+}
+.paymentActive{
+    color: #F27601;
+    text-decoration: none;
+    border-bottom: 5px solid #F27601;
+}
+  
+@media (min-width: 1320px)
+    {
+    .hirecontainer {
+        width: 1205px;
+    }
+}
+@media (min-width: 1200px){
+.container {
+    width: 1205px;
+}
+}
+
+
+
